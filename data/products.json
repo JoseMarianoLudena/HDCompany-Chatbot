@@ -1,0 +1,1214 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cargador HP 19.5V 3.5A | Punta Aguja",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador compatible con laptops HP.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 2,
+    "nombre": "Cargador HP 18.5V 3.5A | Punta Amarilla",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador para modelos HP con punta amarilla.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 3,
+    "nombre": "Cargador LENOVO 20V 3.25A 65W | Punta USB",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Lenovo con conexión USB.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 4,
+    "nombre": "Cargador LENOVO 19.5V 3.25A | Punta Marrón",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador para laptops Lenovo con punta marrón.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 5,
+    "nombre": "Cargador HP 19.5V 1.58A | Punta Pequeña",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador HP con punta pequeña.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 6,
+    "nombre": "Cargador SONY 19.5V 2A | Punta Aguja",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Sony con punta de aguja.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 7,
+    "nombre": "Cargador ACER 19V 3.42A | Punta Pequeña",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Acer con punta pequeña.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 8,
+    "nombre": "Cargador DELL 19.5V 3.34A | Punta Aguja",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Dell con punta de aguja.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 9,
+    "nombre": "Cargador LENOVO 20V 3.25A 65W | Punta Pequeña",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Lenovo con punta pequeña.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 10,
+    "nombre": "Cargador ASUS ORIGINAL 19V 3.42A 65W | Punta Pequeña Cuadrado",
+    "precio": "PEN 140.00",
+    "descripcion": "Cargador original ASUS con punta cuadrada.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 11,
+    "nombre": "Cargador TOSHIBA 19V 3.42A",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Toshiba estándar.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+    
+  },
+  {
+    "id": 12,
+    "nombre": "Cargador SAMSUNG 14V 2.14A | Para Monitor",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Samsung para monitores.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 13,
+    "nombre": "Cargador DELL 19.5V 3.34A | Punta ENVY",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador Dell con punta ENVY.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 14,
+    "nombre": "Adaptador USB de AUDIO 7.1 de 4 Salidas",
+    "precio": "PEN 20.00",
+    "descripcion": "Adaptador USB para audio 7.1.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 15,
+    "nombre": "Batería para TOSHIBA 5024-8-3S2P",
+    "precio": "PEN 89.99",
+    "descripcion": "Batería compatible con modelos Toshiba.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 16,
+    "nombre": "Batería para HP hdv4-6",
+    "precio": "PEN 110.00",
+    "descripcion": "Batería para laptops HP modelo hdv4-6.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 17,
+    "nombre": "Ventilador para Laptop AIRBOOM Cruiser AB021",
+    "precio": "PEN 30.00",
+    "descripcion": "Ventilador portátil para mantener la laptop fresca.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 18,
+    "nombre": "Ventilador para Laptop AIRBOOM Polaris AB003",
+    "precio": "PEN 65.00",
+    "descripcion": "Ventilador eficiente para laptops AIRBOOM.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 19,
+    "nombre": "Ventilador para Laptop AIRBOOM Vortex AB008 | Nivel Ajustable",
+    "precio": "PEN 75.00",
+    "descripcion": "Ventilador con nivel de ajuste para mayor comodidad.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 20,
+    "nombre": "Ventilador para Laptop TARGUS AWE61US",
+    "precio": "PEN 60.00",
+    "descripcion": "Ventilador de alta calidad para laptops TARGUS.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 21,
+    "nombre": "Cooler para Laptop TEROS TE7020N | Hasta 15.6\" Reclinable",
+    "precio": "PEN 45.00",
+    "descripcion": "Cooler reclinable para laptops de hasta 15.6\".",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 22,
+    "nombre": "Ventilador para Laptop XTECH XTA150",
+    "precio": "PEN 45.00",
+    "descripcion": "Ventilador compacto para laptops XTECH.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 23,
+    "nombre": "Cooler para Laptop CYBERCOOL HA-69",
+    "precio": "PEN 50.00",
+    "descripcion": "Cooler eficiente para mantener la temperatura de la laptop.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 24,
+    "nombre": "Cooler AIRBOOM para Case - AB122 | 12CM",
+    "precio": "PEN 30.00",
+    "descripcion": "Cooler de 12CM para mejorar la ventilación del case.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 25,
+    "nombre": "Cooler AIRBOOM ARTIC LED - AB005H Soporte Celular",
+    "precio": "PEN 50.00",
+    "descripcion": "Cooler con LED y soporte para celular.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 26,
+    "nombre": "Laptop LENOVO IDEAPAD 5 ARE05 – RYZEN 7 4700U, 8GB, SSD 500GB, 14″ FHD, WINDOWS 10",
+    "precio": "PEN 2799.00",
+    "descripcion": "Laptop Lenovo con procesador Ryzen 7 y pantalla FHD.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 27,
+    "nombre": "Cargador HP 19.5V 4.74 | Punta Aguja",
+    "precio": "PEN 45.00",
+    "descripcion": "Cargador compatible con laptops HP.",
+    "categoria": "Laptops y Accesorios"
+  },
+  {
+    "id": 28,
+    "nombre": "Laptop HP 250 G9 15.6\" I5-1235U/ 8GB DDR4/ SSD 512GB",
+    "precio": "PEN 1800.00",
+    "descripcion": "Laptop HP con procesador I5 y pantalla de 15.6\".",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 29,
+    "nombre": "Laptop LENOVO 15.6\" IDEAPAD SLIM 3 15IAH8 I5-12450H/ RAM 8GB DDR5/ SSD 512GB",
+    "precio": "PEN 1900.00",
+    "descripcion": "Laptop Lenovo con procesador I5 y RAM DDR5.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 30,
+    "nombre": "Laptop HP ProBook 450 G9 Core i7-1255U, 16GB RAM, 1TB SSD, Pantalla 15.6\", Windows 11",
+    "precio": "PEN 1800.00",
+    "descripcion": "Laptop HP ProBook con procesador i7 y 1TB SSD.",
+    "categoria": "Laptops y Accesorios",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 31,
+    "nombre": "Cable de Datos USB 2.0 para Impresora 1.5 / 1.8 Metros",
+    "precio": "PEN 10.00",
+    "descripcion": "Cable USB 2.0 para conexión de impresoras.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 32,
+    "nombre": "Cabezal para HP Color MH050A",
+    "precio": "PEN 200.00",
+    "descripcion": "Cabezal de impresión para impresoras HP.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 33,
+    "nombre": "Caja de Mantenimiento T671100",
+    "precio": "PEN 165.00",
+    "descripcion": "Caja de mantenimiento para impresoras.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 34,
+    "nombre": "Cabezal para CANON BH-10 Negro",
+    "precio": "PEN 180.00",
+    "descripcion": "Cabezal de impresión para impresoras Canon.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 35,
+    "nombre": "Caja de Mantenimiento L6171 T04D1",
+    "precio": "PEN 119.00",
+    "descripcion": "Caja de mantenimiento para impresoras L6171.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 36,
+    "nombre": "Impresora Térmica de Etiquetas ADVANCE ADV-9010, Velocidad 127 MM/SEG, USB y BT",
+    "precio": "PEN 499.00",
+    "descripcion": "Impresora térmica de etiquetas con conectividad USB y Bluetooth.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 37,
+    "nombre": "Bomba de Succión L4160",
+    "precio": "PEN 160.00",
+    "descripcion": "Bomba de succión para impresoras.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 38,
+    "nombre": "Cabezal Impresora Matricial FX-2190",
+    "precio": "PEN 560.00",
+    "descripcion": "Cabezal para impresoras matriciales FX-2190.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 39,
+    "nombre": "Cabezal Canon Negro BH-1 P/ G3111/ 3110/ 3100/ 4100/ 2110",
+    "precio": "PEN 200.00",
+    "descripcion": "Cabezal de impresión Canon compatible con varios modelos.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 40,
+    "nombre": "Cabezal HP M0H51AA Negro",
+    "precio": "PEN 160.00",
+    "descripcion": "Cabezal de impresión HP M0H51AA.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 41,
+    "nombre": "Impresora Térmica ADVANCE ADV-8010, Velocidad de Impresión 300 MM/SEG, USB+LAN",
+    "precio": "PEN 499.00",
+    "descripcion": "Impresora térmica con alta velocidad de impresión y conectividad USB y LAN.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 42,
+    "nombre": "Toner Laser Black CT201609/ 106R02180",
+    "precio": "PEN 250.00",
+    "descripcion": "Toner láser negro compatible con varios modelos.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 43,
+    "nombre": "Toner Xerox OR-X3010",
+    "precio": "PEN 200.00",
+    "descripcion": "Toner para impresoras Xerox.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 44,
+    "nombre": "Cabezal Canon Color CH-1 P/ G3111/ 3110/ 3100/ 4100/ 2110",
+    "precio": "PEN 150.00",
+    "descripcion": "Cabezal de impresión Canon color compatible con varios modelos.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 45,
+    "nombre": "Impresora HP Ink Tank Wireless 415C/ Tanque | Imprime - Escanea - Fotocopia - WiFi (Z4B53A#AKY)",
+    "precio": "PEN 749.99",
+    "descripcion": "Impresora multifuncional HP con tanque de tinta y conectividad WiFi.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 46,
+    "nombre": "Impresora CANON Multifuncional G3110 Imprime/ Copia/ Escanea/ WiFi",
+    "precio": "PEN 685.50",
+    "descripcion": "Impresora multifuncional Canon con conectividad WiFi.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 47,
+    "nombre": "Impresora CANON Multifuncional G6010 Imprime/ Copia/ Escanea/ WiFi",
+    "precio": "PEN 949.90",
+    "descripcion": "Impresora multifuncional Canon G6010 con WiFi.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 48,
+    "nombre": "Impresora Multifuncional de Tinta EPSON L3250 con WiFi, USB de Alta Velocidad",
+    "precio": "PEN 759.00",
+    "descripcion": "Impresora Epson L3250 multifuncional con conectividad WiFi.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 49,
+    "nombre": "Impresora HP Ink DeskJet Advantage 1275",
+    "precio": "PEN 170.00",
+    "descripcion": "Impresora HP Ink DeskJet Advantage para impresión básica.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 50,
+    "nombre": "Impresora Multifuncional EPSON L3210, Imprime / Escanea / Copia / USB",
+    "precio": "PEN 659.00",
+    "descripcion": "Impresora multifuncional Epson L3210 con conexión USB.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 51,
+    "nombre": "Tinta Unineti 1LT Black",
+    "precio": "PEN 65.00",
+    "descripcion": "Tinta negra Unineti de 1 litro.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 52,
+    "nombre": "Tinta Unineti 1LT Magenta",
+    "precio": "PEN 65.00",
+    "descripcion": "Tinta magenta Unineti de 1 litro.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 53,
+    "nombre": "Tinta Unineti 1LT Yellow",
+    "precio": "PEN 65.00",
+    "descripcion": "Tinta amarilla Unineti de 1 litro.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 54,
+    "nombre": "Tinta Unineti 1LT Cyan",
+    "precio": "PEN 65.00",
+    "descripcion": "Tinta cian Unineti de 1 litro.",
+    "categoria": "Impresoras y Accesorios"
+  },
+  {
+    "id": 55,
+    "nombre": "Webcam FHD 1080 USB Black Caja Marrón",
+    "precio": "PEN 75.00",
+    "descripcion": "Webcam FHD 1080 con conexión USB y diseño en caja marrón.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 56,
+    "nombre": "Webcam TEROS TE-9070 TE-9072 con Micrófono USB",
+    "precio": "PEN 95.00",
+    "descripcion": "Webcam TEROS con micrófono integrado y conexión USB.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 57,
+    "nombre": "Webcam LOGITECH B2B C505E HD 720P USB | 960-001372",
+    "precio": "PEN 169.00",
+    "descripcion": "Webcam Logitech B2B con resolución HD 720P y conexión USB.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 58,
+    "nombre": "Webcam Enkore Nova WC111 con Micrófono",
+    "precio": "PEN 45.00",
+    "descripcion": "Webcam Enkore Nova WC111 con micrófono integrado.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 59,
+    "nombre": "Webcam Cámara Empresarial LOGITECH C925e Full HD 1080p",
+    "precio": "PEN 249.00",
+    "descripcion": "Webcam empresarial Logitech C925e con resolución Full HD 1080p.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 60,
+    "nombre": "Webcam Micronics 2K Quantum – MIC W700",
+    "precio": "PEN 85.00",
+    "descripcion": "Webcam Micronics 2K Quantum con micrófono integrado.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 61,
+    "nombre": "Cámara Domo HD 720P HIKVISION DS-2CE56C0T-IRPF 2.8mm/ Distancia 20M/Sin Audio",
+    "precio": "PEN 55.00",
+    "descripcion": "Cámara domo HIKVISION con resolución HD 720P y distancia de 20 metros.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 62,
+    "nombre": "Cámara Domo 1080p HIKVISION DS-2CE56D0T-IRMMF",
+    "precio": "PEN 65.00",
+    "descripcion": "Cámara domo HIKVISION con resolución 1080p.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 63,
+    "nombre": "Cámara Turbo HIKVISION DS-2CE56H0T-IT3F 720P Turret EXIR 0.01LUX F2.8 EXIR IR40m IP66 (2.8mm)",
+    "precio": "PEN 155.00",
+    "descripcion": "Cámara turbo HIKVISION 720P con tecnología EXIR y resistencia IP66.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 64,
+    "nombre": "Cámara HIKVISION DS-2CE16D0T-IT3F Turbo 1080p Cámara Bala 2.8mm EXIR 40m Metal IP66",
+    "precio": "PEN 198.00",
+    "descripcion": "Cámara bala HIKVISION Turbo 1080p con tecnología EXIR y resistencia IP66.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 65,
+    "nombre": "Cámara Turbo FHD 2MP Hikvision HK-DS2CE16D0T-IRPF 2.8mm/ Distancia 20M",
+    "precio": "PEN 85.00",
+    "descripcion": "Cámara turbo FHD 2MP HIKVISION con distancia de 20 metros.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 66,
+    "nombre": "Cámara Web D-Link DCS-930L",
+    "precio": "PEN 230.00",
+    "descripcion": "Cámara web D-Link DCS-930L para videovigilancia.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 67,
+    "nombre": "Cámara Turbo HIKVISION DS-2CE16D0T-LPFS 2.8MM 2MP/ Distancia 25M",
+    "precio": "PEN 89.00",
+    "descripcion": "Cámara turbo HIKVISION 2MP con distancia de 25 metros.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 68,
+    "nombre": "Cámara de Seguridad EZVIZ H6C PRO 1080P Domo (CS-H6C-R105-1L2WF)",
+    "precio": "PEN 235.00",
+    "descripcion": "Cámara de seguridad EZVIZ H6C PRO con resolución 1080P.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 69,
+    "nombre": "Cámara EZVIZ H8C 2K+ 4MP Domo 4MM Audio CS-H8C-R100-1J4WKFL",
+    "precio": "PEN 260.00",
+    "descripcion": "Cámara EZVIZ H8C 2K+ con audio y resolución de 4MP.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 70,
+    "nombre": "Cámara de Seguridad EZVIZ C2C WiFi, Interior, 1080P 125 Grados CS-CV206",
+    "precio": "PEN 155.00",
+    "descripcion": "Cámara de seguridad EZVIZ C2C con conectividad WiFi y resolución 1080P.",
+    "categoria": "Cámaras Web y Vigilancia"
+  },
+  {
+    "id": 71,
+    "nombre": "Case TEROS TE-1072N Negro",
+    "precio": "PEN 150.00",
+    "descripcion": "Case TEROS TE-1072N en color negro.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 72,
+    "nombre": "Case CYBERMAX Gaming Xtreme CBX 5034 350W Real",
+    "precio": "PEN 200.00",
+    "descripcion": "Case CYBERMAX Gaming Xtreme con fuente de 350W.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 73,
+    "nombre": "Cooler AIRBOOM para Case Rainbow - AB124 | 12CM",
+    "precio": "PEN 25.00",
+    "descripcion": "Cooler AIRBOOM de 12CM para case con diseño rainbow.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 74,
+    "nombre": "Cooler AIRBOOM para Case Turbine Rainbow - AB125",
+    "precio": "PEN 25.00",
+    "descripcion": "Cooler AIRBOOM para case con diseño turbine rainbow.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 75,
+    "nombre": "Cooler AIRBOOM para Case Aureola - AB111 | Double Halo",
+    "precio": "PEN 25.00",
+    "descripcion": "Cooler AIRBOOM con diseño double halo para case.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 76,
+    "nombre": "Case ENKORE Active 1 ENC 2301 230W",
+    "precio": "PEN 130.00",
+    "descripcion": "Case ENKORE Active 1 con fuente de 230W.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 77,
+    "nombre": "Case HALION FLASH CH03BK | Negro | Panel Vidrio Templado | LED-RGB",
+    "precio": "PEN 299.00",
+    "descripcion": "Case HALION FLASH con panel de vidrio templado y LED-RGB.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 78,
+    "nombre": "Case HALION Gaming POLARIS CR13 – 3Coolers - Sin Fuente",
+    "precio": "PEN 249.00",
+    "descripcion": "Case HALION Gaming POLARIS con 3 coolers, sin fuente.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 79,
+    "nombre": "Cooler TEROS TE-8162N ARGB para Intel y AMD",
+    "precio": "PEN 105.00",
+    "descripcion": "Cooler TEROS TE-8162N ARGB compatible con procesadores Intel y AMD.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 80,
+    "nombre": "Case Gamer HALION MALVERICK CR12 - 500W",
+    "precio": "PEN 265.00",
+    "descripcion": "Case Gamer HALION MALVERICK con fuente de 500W.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 81,
+    "nombre": "Case HALION Gaming CROSS R13 – 500W",
+    "precio": "PEN 269.00",
+    "descripcion": "Case HALION Gaming CROSS con fuente de 500W.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 82,
+    "nombre": "Case HALION Gaming CROSS R11 – 500W",
+    "precio": "PEN 279.00",
+    "descripcion": "Case HALION Gaming CROSS R11 con fuente de 500W.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 83,
+    "nombre": "Cooler Genérico AVE AV12025",
+    "precio": "PEN 25.00",
+    "descripcion": "Cooler genérico AVE AV12025.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 84,
+    "nombre": "Enfriamiento Líquido TEROS TE-8164N, ARGB 2 Ventiladores, Sistema de Refrigeración Líquida 240mm",
+    "precio": "PEN 265.00",
+    "descripcion": "Enfriamiento líquido TEROS TE-8164N con 2 ventiladores y sistema de refrigeración de 240mm.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 85,
+    "nombre": "Case Gamer CYBERTEL Xtreme Black CBX5001 Gabinete Gamer USB3.0 4Fan Rainbow",
+    "precio": "PEN 180.00",
+    "descripcion": "Case Gamer CYBERTEL Xtreme Black con 4 ventiladores rainbow y USB3.0.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 86,
+    "nombre": "Case Gamer CYBERTEL Killer Negro CBX5016 Sin Fuente, Panel Vidrio Templado LED-RGB",
+    "precio": "PEN 180.00",
+    "descripcion": "Case Gamer CYBERTEL Killer Negro con panel de vidrio templado y LED-RGB, sin fuente.",
+    "categoria": "Case y Accesorios"
+  },
+  {
+    "id": 87,
+    "nombre": "SSD Sólido WESTERN DIGITAL GREEN 240GB, SATA 6GB/S, 2.5 7MM (WDS240G3G0A)",
+    "precio": "PEN 105.00",
+    "descripcion": "SSD Sólido WD Green de 240GB con conexión SATA 6GB/s.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 88,
+    "nombre": "SSD Sólido KINGSTON A400 480GB SATA 6GB/S, 2.5\", 7MM | SA400S37/480G",
+    "precio": "PEN 175.00",
+    "descripcion": "SSD Sólido Kingston A400 de 480GB con conexión SATA 6GB/s.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 89,
+    "nombre": "SSD Sólido KINGSTON A400 240GB SATA 6GB/S, 2.5\", 7MM | SA400S37/240G",
+    "precio": "PEN 135.00",
+    "descripcion": "SSD Sólido Kingston A400 de 240GB con conexión SATA 6GB/s.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 90,
+    "nombre": "SSD Sólido KINGSTON A400 960GB SATA 6.0 GB/S, 2.5\", 7MM",
+    "precio": "PEN 245.00",
+    "descripcion": "SSD Sólido Kingston A400 de 960GB con conexión SATA 6GB/s.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 91,
+    "nombre": "SSD Sólido WESTERN DIGITAL GREEN 1TB SATA (WDS100T3G0A)",
+    "precio": "PEN 250.00",
+    "descripcion": "SSD Sólido WD Green de 1TB con conexión SATA.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 92,
+    "nombre": "SSD Sólido WESTERN DIGITAL GREEN 480GB 2.5 (WDS480G3G0A)",
+    "precio": "PEN 155.00",
+    "descripcion": "SSD Sólido WD Green de 480GB con conexión SATA.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 93,
+    "nombre": "Disco Duro SEAGATE 500GB SATA 3.0 5900 RPM Pipeline | 16 MB",
+    "precio": "PEN 95.00",
+    "descripcion": "Disco duro Seagate de 500GB con conexión SATA 3.0.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 94,
+    "nombre": "HDD Externo SEAGATE 2TB Basic, USB 3.0/ 2.0 (STJL2000400)",
+    "precio": "PEN 289.00",
+    "descripcion": "HDD externo Seagate de 2TB con conectividad USB 3.0/2.0.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 95,
+    "nombre": "Disco Duro WESTERN DIGITAL 3TB SATA3 3.5\" 64MB 5400RPM (WD30EZRZ)",
+    "precio": "PEN 299.00",
+    "descripcion": "Disco duro WD de 3TB con conexión SATA3 y 5400RPM.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 96,
+    "nombre": "SSD Sólido NVME NV3 KINGSTON 1TB 1000 GB",
+    "precio": "PEN 289.00",
+    "descripcion": "SSD Sólido NVME Kingston de 1TB.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 97,
+    "nombre": "SSD Sólido HP S650 2.5\" 240GB SATA III 6GB/S",
+    "precio": "PEN 120.00",
+    "descripcion": "SSD Sólido HP S650 de 240GB con conexión SATA III.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 98,
+    "nombre": "Disco Sólido MP33 M.2 PCIe SSD, 256GB, DC +3.3V",
+    "precio": "PEN 189.00",
+    "descripcion": "Disco Sólido MP33 M.2 PCIe de 256GB.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 99,
+    "nombre": "SSD Sólido KINGSTON NV1 NVME PCIe SSD 250GB M.2",
+    "precio": "PEN 135.00",
+    "descripcion": "SSD Sólido Kingston NV1 de 250GB con conexión NVME.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 100,
+    "nombre": "SSD Sólido Vulcan Z 480GB, SATA 6.0 Gb/s, 2.5\" T-FORCE",
+    "precio": "PEN 110.00",
+    "descripcion": "SSD Sólido T-FORCE Vulcan Z de 480GB con conexión SATA 6.0 Gb/s.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 101,
+    "nombre": "SSD Sólido HP EX900 250GB M.2, 2280, PCIe GEN 3X4, NVME 1.3",
+    "precio": "PEN 125.00",
+    "descripcion": "SSD Sólido HP EX900 de 250GB con conexión NVME.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 102,
+    "nombre": "SSD Sólido Kingston KC600 512GB",
+    "precio": "PEN 239.00",
+    "descripcion": "SSD Sólido Kingston KC600 de 512GB.",
+    "categoria": "Discos Duros / Discos Sólidos"
+  },
+  {
+    "id": 103,
+    "nombre": "TV BOX 2+16GB MXQ Pro 4K ANDROID",
+    "precio": "PEN 139.00",
+    "descripcion": "TV Box MXQ Pro 4K con 2GB de RAM y 16GB de almacenamiento.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 104,
+    "nombre": "Capturador de Video y Audio Easycapture",
+    "precio": "PEN 59.00",
+    "descripcion": "Capturador de video y audio Easycapture.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 105,
+    "nombre": "Conversor VGA a HDMI 1080 | Caja Verde/Negro",
+    "precio": "PEN 35.00",
+    "descripcion": "Conversor de VGA a HDMI con resolución 1080.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 106,
+    "nombre": "Extender VGA por Cable UTP RJ45 hasta 60 Metros",
+    "precio": "PEN 55.00",
+    "descripcion": "Extensor VGA por cable UTP RJ45 con alcance de hasta 60 metros.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 107,
+    "nombre": "Monitor LG LED 22\" 22MR410-B VGA - HDMI",
+    "precio": "PEN 330.00",
+    "descripcion": "Monitor LG LED de 22\" con conexiones VGA y HDMI.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 108,
+    "nombre": "Monitor TEROS TE-3130, 23.8\" IPS, 1920X1080 FULL HD, HDMI, VGA, VESA",
+    "precio": "PEN 389.00",
+    "descripcion": "Monitor TEROS de 23.8\" con resolución Full HD y múltiples conexiones.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 109,
+    "nombre": "Monitor Teros TE1911S, 19\", IPS, 1680x1050, HDMI / VGA / Speaker",
+    "precio": "PEN 259.00",
+    "descripcion": "Monitor Teros de 19\" con resolución 1680x1050 y altavoces integrados.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 110,
+    "nombre": "X96 MINI TV BOX 2+16 GB ANDROID 11",
+    "precio": "PEN 160.00",
+    "descripcion": "TV Box X96 Mini con 2GB de RAM y 16GB de almacenamiento, Android 11.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 111,
+    "nombre": "Monitor Teros TE-2124S 21.45 Pulgadas IPS 1920x1080 FullHD HDMI VGA",
+    "precio": "PEN 355.00",
+    "descripcion": "Monitor Teros de 21.45\" con resolución Full HD y conexiones HDMI y VGA.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 112,
+    "nombre": "Monitor TEROS TE-2128S, 21.5\" IPS, 1920x1080 Full HD, HDMI / VGA, VESA 100MHZ",
+    "precio": "PEN 260.00",
+    "descripcion": "Monitor TEROS de 21.5\" con resolución Full HD y soporte VESA.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 113,
+    "nombre": "Monitor Empresarial HP E231 23\" FHD 60 Hz (VGA, DVI, DisplayPort) - Negro - Seminuevo",
+    "precio": "PEN 280.00",
+    "descripcion": "Monitor HP E231 de 23\" con resolución FHD y múltiples conexiones.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 114,
+    "nombre": "Monitor HP 20 Pulg P204V HD 1600X900 HDMI/VGA 60HZ Seminuevo",
+    "precio": "PEN 240.00",
+    "descripcion": "Monitor HP de 20\" con resolución HD y conexiones HDMI y VGA.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 115,
+    "nombre": "Monitor Samsung 27', FHD, 100Hz, Panel IPS, Essential S3 Plano, LS27D300GALXZ",
+    "precio": "PEN 460.00",
+    "descripcion": "Monitor Samsung de 27\" con resolución FHD y 100Hz.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 116,
+    "nombre": "Monitor SAMSUNG Essential Monitor S3, 22\" FHD IPS, 100Hz, HDMI, VGA S22D300GAL",
+    "precio": "PEN 300.00",
+    "descripcion": "Monitor Samsung de 22\" con resolución FHD y 100Hz.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 117,
+    "nombre": "Monitor Samsung LS24D360GALXPE 24\" FHD S3 100HZ Curvo, HDMI x1/VGA x1/Auriculares x1",
+    "precio": "PEN 360.00",
+    "descripcion": "Monitor Samsung curvo de 24\" con resolución FHD y múltiples conexiones.",
+    "categoria": "Monitor / TV & Accesorios"
+  },
+  {
+    "id": 118,
+    "nombre": "Tarjeta de Video MSI NVIDIA GeForce N210, 1GB DDR3 64-bit, HDMI/DVI/VGA",
+    "precio": "PEN 180.00",
+    "descripcion": "Tarjeta de video MSI con 1GB de memoria DDR3 y múltiples salidas.",
+    "categoria": "Tarjetas de Video"
+  },
+  {
+    "id": 119,
+    "nombre": "PNY NVIDIA QUADRO P1000 V2 4GB GDDR5 128BITS para diseño",
+    "precio": "PEN 1500.00",
+    "descripcion": "Tarjeta de video PNY Quadro P1000 V2 con 4GB GDDR5, ideal para diseño.",
+    "categoria": "Tarjetas de Video"
+  },
+  {
+    "id": 120,
+    "nombre": "Tarjeta de Video 1GB BOETEC GEFORCE G210LP 1GB GDDR3 64BITS",
+    "precio": "PEN 165.00",
+    "descripcion": "Tarjeta de video BOETEC GeForce G210LP con 1GB de memoria GDDR3.",
+    "categoria": "Tarjetas de Video"
+  },
+  {
+    "id": 121,
+    "nombre": "Tarjeta de Video AFOX Radeon R9 370 4GB GDDR5, PCIe 3.0, Dual Fan, DP, HDMI, DL-DVI-D",
+    "precio": "PEN 499.00",
+    "descripcion": "Tarjeta de video AFOX Radeon R9 370 con 4GB GDDR5 y múltiples salidas.",
+    "categoria": "Tarjetas de Video"
+  },
+  {
+    "id": 122,
+    "nombre": "Tarjeta de Video ASUSI Nvidia GeForce GT710, 2GB DDR3 64-bit, PCI-e 2.0",
+    "precio": "PEN 250.00",
+    "descripcion": "Tarjeta de video ASUSI GeForce GT710 con 2GB de memoria DDR3.",
+    "categoria": "Tarjetas de Video"
+  },
+  {
+    "id": 123,
+    "nombre": "Tarjeta de Video COOLMARK GT 210 1GB, DDR3 64-bit, HDMI/DVI/VGA",
+    "precio": "PEN 160.00",
+    "descripcion": "Tarjeta de video COOLMARK GT 210 con 1GB de memoria DDR3 y múltiples salidas.",
+    "categoria": "Tarjetas de Video"
+  },
+  {
+    "id": 124,
+    "nombre": "Teclado Inalambrico c/ Touchpad LOGITECH K400 PLUS TV | BLACK",
+    "precio": "PEN 119.99",
+    "descripcion": "Teclado inalámbrico Logitech K400 Plus con touchpad integrado.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 125,
+    "nombre": "Kit Alámbrico Teclado y Mouse LOGITECH MK120 | 920-004428",
+    "precio": "PEN 58.00",
+    "descripcion": "Kit alámbrico de teclado y mouse Logitech MK120.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 126,
+    "nombre": "Teclado Gamer ENKORE Epsilon ENK600 USB Retroiluminado",
+    "precio": "PEN 50.00",
+    "descripcion": "Teclado gamer ENKORE Epsilon con retroiluminación.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 127,
+    "nombre": "Mouse Gamer + Mouse Pad HALION 4D COBRA HA-911P",
+    "precio": "PEN 40.00",
+    "descripcion": "Combo de mouse gamer y mouse pad HALION 4D Cobra.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 128,
+    "nombre": "Teclado Inalambrico CYBERTEL Smart TV NAVIGATOR - CYB K237",
+    "precio": "PEN 72.00",
+    "descripcion": "Teclado inalámbrico CYBERTEL para Smart TV.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 129,
+    "nombre": "Mouse MICROSOFT Inalambrico SOURIS 1850 Negro",
+    "precio": "PEN 60.00",
+    "descripcion": "Mouse inalámbrico Microsoft SOURIS 1850 en color negro.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 130,
+    "nombre": "Combo Alámbrico TEROS TE-4030B | Teclado, Mouse, Parlante",
+    "precio": "PEN 60.00",
+    "descripcion": "Combo alámbrico TEROS que incluye teclado, mouse y parlante.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 131,
+    "nombre": "Mouse AVATEC Bluetooth CMS-6228BS | DPI 1600",
+    "precio": "PEN 59.99",
+    "descripcion": "Mouse Bluetooth AVATEC con DPI de 1600.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 132,
+    "nombre": "Mouse ENKORE Pivot EKM105 USB",
+    "precio": "PEN 15.00",
+    "descripcion": "Mouse ENKORE Pivot con conexión USB.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 133,
+    "nombre": "Teclado Alámbrico MICRONICS Milano MIC K704X | PLOMO",
+    "precio": "PEN 48.00",
+    "descripcion": "Teclado alámbrico Micronics Milano en color plomo.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 134,
+    "nombre": "Kit Alámbrico Teclado y Mouse GENIUS KM-160 BLACK",
+    "precio": "PEN 50.00",
+    "descripcion": "Kit alámbrico de teclado y mouse Genius KM-160 en color negro.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 135,
+    "nombre": "Mouse GENIUS Micro Traveler 9000R Inalambrico Verde (Batería Recargable)",
+    "precio": "PEN 69.00",
+    "descripcion": "Mouse inalámbrico Genius Micro Traveler 9000R en color verde.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 136,
+    "nombre": "Kit Teclado y Mouse CYBERTEL Twister CYB T1801 USB",
+    "precio": "PEN 80.00",
+    "descripcion": "Kit de teclado y mouse CYBERTEL Twister con conexión USB.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 137,
+    "nombre": "Teclado Alámbrico CYBERTEL Ebony CYB K105 BLACK",
+    "precio": "PEN 30.00",
+    "descripcion": "Teclado alámbrico CYBERTEL Ebony en color negro.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 138,
+    "nombre": "Mouse CYBERTEL Storm X CYB M103X BLUE | DPI 1000",
+    "precio": "PEN 15.00",
+    "descripcion": "Mouse CYBERTEL Storm X en color azul con DPI de 1000.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 139,
+    "nombre": "Teclado Alámbrico Mecánico Gamer ENKORE Kingdom ENK1001",
+    "precio": "PEN 115.00",
+    "descripcion": "Teclado alámbrico mecánico gamer ENKORE Kingdom.",
+    "categoria": "Mouse / Teclado / Pad Mouse / Kit",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 140,
+    "nombre": "Mouse Gamer + Mouse Pad Cybertel Scorpion CYB TG5003",
+    "precio": "PEN 40.00",
+    "descripcion": "Combo de mouse gamer y mouse pad Cybertel Scorpion.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 141,
+    "nombre": "CPU AMD RYZEN",
+    "precio": "PEN 3200.00",
+    "descripcion": "Procesador AMD Ryzen.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 142,
+    "nombre": "Mousepad con Muñequera / Diseño",
+    "precio": "PEN 15.00",
+    "descripcion": "Mousepad con muñequera y diseño.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 143,
+    "nombre": "Bandeja de Disco p/Laptop SECOND HDD CADDY 12.7 MM",
+    "precio": "PEN 30.00",
+    "descripcion": "Bandeja para segundo disco duro en laptops, caddy de 12.7 mm.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 144,
+    "nombre": "Gamepad ENKORE ENG1001PUP-B USB PC PS2 PS3 12 Botones Vibrador",
+    "precio": "PEN 45.00",
+    "descripcion": "Gamepad ENKORE con 12 botones y vibración, compatible con PC, PS2 y PS3.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 145,
+    "nombre": "Gamepad ENKORE Lithium ENG1003PUP-W Wireless PC PS2 PS3 12 Botones Vibrador",
+    "precio": "PEN 50.00",
+    "descripcion": "Gamepad inalámbrico ENKORE con 12 botones y vibración, compatible con PC, PS2 y PS3.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 146,
+    "nombre": "Mando CYBERTEL KILLER CYB G803BT Wireless PC iOS 14 Botones Vibrador | Inalambrico",
+    "precio": "PEN 49.00",
+    "descripcion": "Mando inalámbrico CYBERTEL KILLER con 14 botones y vibración, compatible con PC y iOS.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 147,
+    "nombre": "Mini Speaker Bluetooth Minions",
+    "precio": "PEN 30.00",
+    "descripcion": "Mini altavoz Bluetooth con diseño de Minions.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 148,
+    "nombre": "Mochila TEROS 15.6 Pulgadas / Celeste y Azul",
+    "precio": "PEN 29.00",
+    "descripcion": "Mochila TEROS de 15.6 pulgadas en colores celeste y azul.",
+    "categoria": "OFERTAS",
+    "image_url": "/images/img4.png"
+
+  },
+  {
+    "id": 149,
+    "nombre": "Tablet ADVANCE Intro TR3947, 7\" IPS 1024x600, Android 9, 16GB, 1GB RAM, Wi-Fi, Bluetooth",
+    "precio": "PEN 259.00",
+    "descripcion": "Tablet ADVANCE de 7\" con resolución IPS, Android 9, 16GB de almacenamiento y 1GB de RAM.",
+    "categoria": "Tablets y Celulares",
+    "image_url": "/images/img4.png"
+  },
+  {
+    "id": 150,
+    "nombre": "Funda TARGUS para iPad Vuscape THZ157US",
+    "precio": "PEN 60.00",
+    "descripcion": "Funda TARGUS para iPad modelo Vuscape.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 151,
+    "nombre": "Tablet LENOVO TB-7305F 7\" 1GB RAM 16GB | Inc Protector",
+    "precio": "PEN 279.00",
+    "descripcion": "Tablet LENOVO de 7\" con 1GB de RAM y 16GB de almacenamiento, incluye protector.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 152,
+    "nombre": "TV BOX H96 MAX Android 11 4K Media Player - 4GB",
+    "precio": "PEN 249.00",
+    "descripcion": "TV Box H96 MAX con Android 11 y 4GB de RAM, compatible con 4K.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 153,
+    "nombre": "Teclado Superslim ANKER COVER Bluetooth | p/ iPad 4 / 3 / 2",
+    "precio": "PEN 100.00",
+    "descripcion": "Teclado Bluetooth ANKER Superslim para iPad 4, 3 y 2.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 154,
+    "nombre": "Xtech Cargador Inalámbrico Blanco iPhone Android XS S220",
+    "precio": "PEN 55.00",
+    "descripcion": "Cargador inalámbrico Xtech en color blanco, compatible con iPhone y Android.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 155,
+    "nombre": "Tableta Gráfica XP-PEN Deco 01 V2",
+    "precio": "PEN 239.00",
+    "descripcion": "Tableta gráfica XP-PEN Deco 01 V2.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 156,
+    "nombre": "Tableta Gráfica XP-PEN Deco Fun S CT640 USB Tipo C 63”x 4” ROJO",
+    "precio": "PEN 169.00",
+    "descripcion": "Tableta gráfica XP-PEN Deco Fun S en color rojo, conexión USB Tipo C.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 157,
+    "nombre": "Protector de Tablet 4.7 Pulgadas",
+    "precio": "PEN 15.00",
+    "descripcion": "Protector para tablet de 4.7 pulgadas.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 158,
+    "nombre": "Tableta Gráfica One By Wacom Small, Conexión USB, Incluye Lápiz, Negro con Rojo",
+    "precio": "PEN 159.00",
+    "descripcion": "Tableta gráfica One By Wacom Small con conexión USB, incluye lápiz.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 159,
+    "nombre": "Tableta Gráfica XP-PEN Deco Fun S CT640 USB Tipo C 63”x VERDE",
+    "precio": "PEN 169.00",
+    "descripcion": "Tableta gráfica XP-PEN Deco Fun S en color verde, conexión USB Tipo C.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 160,
+    "nombre": "Tableta Gráfica XP-PEN Deco Fun S CT640 USB Tipo C 63”x AZUL",
+    "precio": "PEN 169.00",
+    "descripcion": "Tableta gráfica XP-PEN Deco Fun S en color azul, conexión USB Tipo C.",
+    "categoria": "Tablets y Celulares"
+  },
+  {
+    "id": 161,
+    "nombre": "Teclado Microsoft Surface Pro con Almacenamiento para Lápiz",
+    "precio": "PEN 950.00",
+    "descripcion": "Teclado para Microsoft Surface Pro con almacenamiento para lápiz.",
+    "categoria": "Tablets y Celulares"
+  }
+]
+

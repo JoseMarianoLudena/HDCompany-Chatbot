@@ -1,0 +1,7 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\josem\\Desktop\\hdcompany-chatbot\\venv\\Scripts\\python.exe",
+  "python.analysis.extraPaths": [
+    "C:\\Users\\josem\\Desktop\\hdcompany-chatbot\\venv\\Lib\\site-packages"
+  ],
+  "git.ignoreLimitWarning": true
+}

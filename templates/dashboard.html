@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Agentes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-right: 1rem;
+            overflow-y: auto;
+        }
+        .sidebar-header {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+        .sidebar-item {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .sidebar-item:hover {
+            background: #f3f4f6;
+        }
+        .sidebar-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+        .chat-container {
+            flex: 1;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 10;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            scroll-behavior: smooth;
+        }
+        .message {
+            margin-bottom: 1rem;
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+        .client {
+            background: #3b82f6;
+            color: white;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+        }
+        .agent {
+            background: #10b981;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        .timestamp {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+        .chat-input {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        .chat-input textarea {
+            resize: none;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+        .chat-input textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .chat-input button {
+            background: linear-gradient(to right, #3b82f6, #10b981);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .chat-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .success, .error {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #dc2626; }
+        .no-conversations {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .nav-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" data-conversations="{{ conversations | tojson | safe }}">
+        <div class="container">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h2 class="text-lg font-semibold text-gray-800">Conversaciones</h2>
+                </div>
+                {% if conversations %}
+                    {% for user_phone, data in conversations.items() %}
+                        <div class="sidebar-item {{ 'active' if loop.first }}" id="sidebar-{{ user_phone }}" onclick="selectConversation('{{ user_phone }}')">
+                            {{ user_phone }} ({{ data.name or 'Desconocido' }}{{ ' - Grupo' if data.is_group else '' }})
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h1 class="text-2xl font-bold text-gray-800">Dashboard de Agentes</h1>
+                    <p class="text-sm text-gray-500">Conectado como: {{ current_user.username }} | <a href="{{ url_for('logout') }}" class="nav-link">Cerrar Sesión</a> | <a href="{{ url_for('clients') }}" class="nav-link">Ver Clientes</a></p>
+                </div>
+                <div class="chat-messages">
+                    {% if success %}
+                        <p class="success">{{ success }}</p>
+                    {% endif %}
+                    {% if error %}
+                        <p class="error">{{ error }}</p>
+                    {% endif %}
+                    {% if conversations %}
+                        {% for user_phone, data in conversations.items() %}
+                            {% if loop.first %}
+                                <div class="conversation" id="conversation-{{ user_phone }}">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Conversación con: {{ user_phone }} ({{ data.name or 'Desconocido' }}{{ ' - Grupo' if data.is_group else '' }})</h3>
+                                    {% if data.active_poll %}
+                                        <p class="text-sm text-gray-600">Encuesta activa: {{ data.active_poll.question }} | Opciones: {{ data.active_poll.options | join(', ') }}</p>
+                                        <p class="text-sm text-gray-600">Respuestas: {{ data.active_poll.responses | length }} voto(s)</p>
+                                    {% endif %}
+                                    {% for msg in data.messages %}
+                                        <div class="message {{ 'client' if msg.sender == 'client' else 'agent' }}">
+                                            <p>{{ msg.message }}</p>
+                                            <p class="timestamp">{{ msg.timestamp }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-conversations">Selecciona una conversación.</p>
+                    {% endif %}
+                </div>
+                <div class="chat-input">
+                    {% if conversations %}
+                        {% for user_phone, data in conversations.items() %}
+                            {% if loop.first %}
+                                <form method="POST" id="form-{{ user_phone }}">
+                                    <input type="hidden" name="user_phone" value="{{ user_phone }}">
+                                    <div class="flex gap-2">
+                                        <textarea name="message" placeholder="Escribe tu respuesta aquí" required rows="2"></textarea>
+                                        <button type="submit">Enviar</button>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Inicializar conversations desde data-conversations
+        let conversations;
+        try {
+            const appDiv = document.getElementById('app');
+            conversations = JSON.parse(appDiv.dataset.conversations);
+            window.conversations = conversations;
+        } catch (e) {
+            console.error('Error al parsear conversations:', e);
+            window.conversations = {};
+        }
+
+        const socket = io('/dashboard');
+        let selectedPhone = null;
+
+        socket.on('connect', () => {
+            console.log('Conectado al servidor SocketIO');
+        });
+
+        socket.on('new_message', (data) => {
+            console.log('Nuevo mensaje recibido:', data);
+            let conversation = document.getElementById(`conversation-${data.user_phone}`);
+            let sidebarItem = document.getElementById(`sidebar-${data.user_phone}`);
+            if (!sidebarItem) {
+                const sidebar = document.querySelector('.sidebar');
+                sidebarItem = document.createElement('div');
+                sidebarItem.className = 'sidebar-item';
+                sidebarItem.id = `sidebar-${data.user_phone}`;
+                sidebarItem.innerHTML = `${data.user_phone} (${data.name || 'Desconocido'}${data.is_group ? ' - Grupo' : ''})`;
+                sidebarItem.onclick = () => selectConversation(data.user_phone);
+                sidebar.appendChild(sidebarItem);
+                if (!window.conversations[data.user_phone]) {
+                    window.conversations[data.user_phone] = {
+                        messages: [],
+                        name: data.name,
+                        escalated: data.escalated,
+                        state: data.state,
+                        is_group: data.is_group,
+                        group_id: data.group_id,
+                        active_poll: data.active_poll
+                    };
+                }
+                window.conversations[data.user_phone].messages.push({
+                    message: data.message,
+                    sender: data.sender,
+                    timestamp: data.timestamp
+                });
+                if (!selectedPhone) {
+                    selectConversation(data.user_phone);
+                }
+            }
+            if (data.user_phone === selectedPhone) {
+                if (!conversation) {
+                    conversation = document.createElement('div');
+                    conversation.className = 'conversation';
+                    conversation.id = `conversation-${data.user_phone}`;
+                    conversation.innerHTML = `
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Conversación con: ${data.user_phone} (${data.name || 'Desconocido'}${data.is_group ? ' - Grupo' : ''})</h3>
+                    `;
+                    if (data.active_poll) {
+                        conversation.innerHTML += `
+                            <p class="text-sm text-gray-600">Encuesta activa: ${data.active_poll.question} | Opciones: ${data.active_poll.options.join(', ')}</p>
+                            <p class="text-sm text-gray-600">Respuestas: ${Object.keys(data.active_poll.responses).length} voto(s)</p>
+                        `;
+                    }
+                    document.querySelector('.chat-messages').appendChild(conversation);
+                }
+                const newMessage = document.createElement('div');
+                newMessage.className = `message ${data.sender === 'client' ? 'client' : 'agent'}`;
+                newMessage.innerHTML = `
+                    <p>${data.message}</p>
+                    <p class="timestamp">${data.timestamp}</p>
+                `;
+                conversation.appendChild(newMessage);
+                scrollToBottom();
+            }
+            if (!window.conversations[data.user_phone]) {
+                window.conversations[data.user_phone] = {
+                    messages: [],
+                    name: data.name,
+                    escalated: data.escalated,
+                    state: data.state,
+                    is_group: data.is_group,
+                    group_id: data.group_id,
+                    active_poll: data.active_poll
+                };
+            }
+            window.conversations[data.user_phone].messages.push({
+                message: data.message,
+                sender: data.sender,
+                timestamp: data.timestamp
+            });
+            if (data.active_poll) {
+                window.conversations[data.user_phone].active_poll = data.active_poll;
+            }
+        });
+
+        socket.on('close_conversation', (data) => {
+            console.log('Conversación cerrada:', data);
+            const conversation = document.getElementById(`conversation-${data.user_phone}`);
+            const sidebarItem = document.getElementById(`sidebar-${data.user_phone}`);
+            const chatInput = document.getElementById(`chat-input-${data.user_phone}`);
+            if (conversation) conversation.remove();
+            if (sidebarItem) sidebarItem.remove();
+            if (chatInput) chatInput.remove();
+            if (selectedPhone === data.user_phone) {
+                selectedPhone = null;
+                document.querySelector('.chat-messages').innerHTML = '<p class="no-conversations">Selecciona una conversación.</p>';
+                document.querySelector('.chat-input').innerHTML = '';
+            }
+            delete window.conversations[data.user_phone];
+            const remainingSidebarItems = document.querySelectorAll('.sidebar-item');
+            if (remainingSidebarItems.length > 0) {
+                selectConversation(remainingSidebarItems[0].id.replace('sidebar-', ''));
+            }
+        });
+
+        socket.on('update_conversations', (conversations) => {
+            console.log('Actualizando conversaciones:', conversations);
+            window.conversations = conversations;
+            const sidebar = document.querySelector('.sidebar');
+            const chatMessages = document.querySelector('.chat-messages');
+            const chatInput = document.querySelector('.chat-input');
+            sidebar.innerHTML = '<div class="sidebar-header"><h2 class="text-lg font-semibold text-gray-800">Conversaciones</h2></div>';
+            chatMessages.innerHTML = '<p class="no-conversations">Selecciona una conversación.</p>';
+            chatInput.innerHTML = '';
+            selectedPhone = null;
+            for (const [user_phone, data] of Object.entries(conversations)) {
+                const sidebarItem = document.createElement('div');
+                sidebarItem.className = 'sidebar-item';
+                sidebarItem.id = `sidebar-${user_phone}`;
+                sidebarItem.innerHTML = `${user_phone} (${data.name || 'Desconocido'}${data.is_group ? ' - Grupo' : ''})`;
+                sidebarItem.onclick = () => selectConversation(user_phone);
+                sidebar.appendChild(sidebarItem);
+                if (!selectedPhone) {
+                    selectConversation(user_phone);
+                }
+            }
+        });
+
+        function selectConversation(user_phone) {
+            if (selectedPhone === user_phone) return;
+            selectedPhone = user_phone;
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => item.classList.remove('active'));
+            document.getElementById(`sidebar-${user_phone}`).classList.add('active');
+            const chatMessages = document.querySelector('.chat-messages');
+            chatMessages.innerHTML = '';
+            const conversation = document.createElement('div');
+            conversation.className = 'conversation';
+            conversation.id = `conversation-${user_phone}`;
+            if (window.conversations[user_phone]) {
+                conversation.innerHTML = `
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Conversación con: ${user_phone} (${window.conversations[user_phone].name || 'Desconocido'}${window.conversations[user_phone].is_group ? ' - Grupo' : ''})</h3>
+                `;
+                if (window.conversations[user_phone].active_poll) {
+                    conversation.innerHTML += `
+                        <p class="text-sm text-gray-600">Encuesta activa: ${window.conversations[user_phone].active_poll.question} | Opciones: ${window.conversations[user_phone].active_poll.options.join(', ')}</p>
+                        <p class="text-sm text-gray-600">Respuestas: ${Object.keys(window.conversations[user_phone].active_poll.responses).length} voto(s)</p>
+                    `;
+                }
+                for (const msg of window.conversations[user_phone].messages) {
+                    const message = document.createElement('div');
+                    message.className = `message ${msg.sender === 'client' ? 'client' : 'agent'}`;
+                    message.innerHTML = `
+                        <p>${msg.message}</p>
+                        <p class="timestamp">${msg.timestamp}</p>
+                    `;
+                    conversation.appendChild(message);
+                }
+            }
+            chatMessages.appendChild(conversation);
+            const chatInput = document.querySelector('.chat-input');
+            chatInput.innerHTML = `
+                <form method="POST" id="form-${user_phone}">
+                    <input type="hidden" name="user_phone" value="${user_phone}">
+                    <div class="flex gap-2">
+                        <textarea name="message" placeholder="Escribe tu respuesta aquí" required rows="2"></textarea>
+                        <button type="submit">Enviar</button>
+                    </div>
+                </form>
+            `;
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const chatMessages = document.querySelector('.chat-messages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>

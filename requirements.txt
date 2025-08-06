@@ -1,0 +1,15 @@
+fastapi==0.103.1
+sqlalchemy==2.0.20
+python-dotenv==1.0.0
+langchain==0.3.27
+langchain-openai==0.3.28
+langchain-core==0.3.72
+openai==1.86.0
+uvicorn==0.23.2
+aiohttp==3.10.10
+python-socketio==5.9.0
+langsmith==0.3.45
+crewai==0.152.0
+psycopg2-binary==2.9.9
+aiosqlite==0.20.0
+sqlalchemy==2.0.23
