@@ -41,7 +41,19 @@ sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
 app.mount("/socket.io", socketio.ASGIApp(sio))
 
 # Usar DATABASE_URL de entorno (PostgreSQL en Render, SQLite localmente si no está definida)
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///hdcompany.db")
+def get_database_url():
+    database_url = os.getenv("DATABASE_URL")
+    if database_url:
+        # En Render, cambiar postgresql:// por postgresql+asyncpg://
+        if database_url.startswith("postgresql://"):
+            database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return database_url
+    else:
+        # Desarrollo local con SQLite
+        return "sqlite+aiosqlite:///hdcompany.db"
+
+DATABASE_URL = get_database_url()
+
 engine = create_async_engine(DATABASE_URL, echo=True)
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
@@ -828,8 +840,6 @@ async def process_message(message: WhatsAppMessage):
 async def root():
     return RedirectResponse(url="/login", status_code=303)
 
-import asyncio
-asyncio.run(init_db())
 
 if __name__ == "__main__":
     import uvicorn

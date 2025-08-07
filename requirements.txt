@@ -12,6 +12,7 @@ aiohttp==3.10.10
 python-socketio==5.9.0
 langsmith==0.3.45
 crewai==0.152.0
-psycopg2-binary==2.9.9
+asyncpg==0.29.0
 aiosqlite==0.20.0
 passlib==1.7.4
+bcrypt==4.2.1
