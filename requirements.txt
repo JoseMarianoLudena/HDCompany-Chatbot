@@ -15,4 +15,4 @@ crewai==0.152.0
 asyncpg==0.29.0
 aiosqlite==0.20.0
 passlib==1.7.4
-bcrypt==3.2.0
+bcrypt==4.2.1
