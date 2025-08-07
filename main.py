@@ -751,7 +751,9 @@ async def process_message(message: WhatsAppMessage):
                 response_text = response.content
                 # Detectar si la respuesta es una imagen o una lista de imágenes
                 image_url_match = re.match(r'🖼️ (https?://[^\s]+)', response_text)
+                markdown_link_match = re.search(r'🖼️ \[.*?\]\((https?://[^\s)]+)\)', response_text)
                 image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
+                
                 if image_url_match:
                     image_url = image_url_match.group(1)
                     response_body = {
@@ -759,8 +761,19 @@ async def process_message(message: WhatsAppMessage):
                         "image": {
                             "link": image_url
                         },
-                        "caption": f"🖼️ Imagen de {response_text.split(']')[0].split('[')[-1]}. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
+                        "caption": f"🖼️ Imagen para ti, {conv.name if conv.name != 'Desconocido' else 'Ko'}"
                     }
+
+                elif markdown_link_match:
+                    image_url = markdown_link_match.group(1)
+                    response_body = {
+                        "type": "image",
+                        "image": {
+                            "link": image_url
+                        },
+                        "caption": f"🖼️ Imagen para ti, {conv.name if conv.name != 'Desconocido' else 'Ko'}"
+                    }
+
                 elif image_list_match:
                     image_lines = image_list_match.group(1).split('\n')
                     response_body = []
@@ -780,6 +793,7 @@ async def process_message(message: WhatsAppMessage):
                             "type": "text",
                             "body": f"🖼️ Tu carrito está vacío o no hay imágenes disponibles. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                         }
+
                 else:
                     response_body = {
                         "type": "text",
