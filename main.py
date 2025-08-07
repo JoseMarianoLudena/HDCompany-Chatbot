@@ -712,7 +712,7 @@ async def process_message(message: WhatsAppMessage):
                 conversation_context += f"{msg.sender}: {msg.message}\n"
             chat_history.add_message(HumanMessage(content=user_input))
             # Ajustar URLs relativas a absolutas
-            base_url = "https://tudominio.com"  # Reemplaza con tu dominio real
+            base_url = "https://hdcompany-chatbot.onrender.com"  # Reemplaza con tu dominio real
             products_with_absolute_urls = [
                 {**product, "image_url": f"{base_url}{product['image_url']}" if product.get('image_url') and product['image_url'].startswith('/') else product.get('image_url', '')}
                 for product in products

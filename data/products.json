@@ -5,7 +5,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador compatible con laptops HP.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador para modelos HP con punta amarilla.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Lenovo con conexión USB.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador para laptops Lenovo con punta marrón.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador HP con punta pequeña.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Sony con punta de aguja.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -54,7 +54,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Acer con punta pequeña.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -63,7 +63,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Dell con punta de aguja.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -72,7 +72,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Lenovo con punta pequeña.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -81,7 +81,7 @@
     "precio": "PEN 140.00",
     "descripcion": "Cargador original ASUS con punta cuadrada.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -90,7 +90,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Toshiba estándar.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
     
   },
   {
@@ -99,7 +99,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Samsung para monitores.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -108,7 +108,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cargador Dell con punta ENVY.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -117,7 +117,7 @@
     "precio": "PEN 20.00",
     "descripcion": "Adaptador USB para audio 7.1.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -126,7 +126,7 @@
     "precio": "PEN 89.99",
     "descripcion": "Batería compatible con modelos Toshiba.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -135,7 +135,7 @@
     "precio": "PEN 110.00",
     "descripcion": "Batería para laptops HP modelo hdv4-6.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -144,7 +144,7 @@
     "precio": "PEN 30.00",
     "descripcion": "Ventilador portátil para mantener la laptop fresca.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -153,7 +153,7 @@
     "precio": "PEN 65.00",
     "descripcion": "Ventilador eficiente para laptops AIRBOOM.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -162,7 +162,7 @@
     "precio": "PEN 75.00",
     "descripcion": "Ventilador con nivel de ajuste para mayor comodidad.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -171,7 +171,7 @@
     "precio": "PEN 60.00",
     "descripcion": "Ventilador de alta calidad para laptops TARGUS.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -180,7 +180,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Cooler reclinable para laptops de hasta 15.6\".",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 22,
@@ -188,7 +188,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Ventilador compacto para laptops XTECH.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 23,
@@ -196,7 +196,7 @@
     "precio": "PEN 50.00",
     "descripcion": "Cooler eficiente para mantener la temperatura de la laptop.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 24,
@@ -204,7 +204,7 @@
     "precio": "PEN 30.00",
     "descripcion": "Cooler de 12CM para mejorar la ventilación del case.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 25,
@@ -212,7 +212,7 @@
     "precio": "PEN 50.00",
     "descripcion": "Cooler con LED y soporte para celular.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 26,
@@ -220,7 +220,7 @@
     "precio": "PEN 2799.00",
     "descripcion": "Laptop Lenovo con procesador Ryzen 7 y pantalla FHD.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 27,
@@ -235,7 +235,7 @@
     "precio": "PEN 1800.00",
     "descripcion": "Laptop HP con procesador I5 y pantalla de 15.6\".",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 29,
@@ -243,7 +243,7 @@
     "precio": "PEN 1900.00",
     "descripcion": "Laptop Lenovo con procesador I5 y RAM DDR5.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 30,
@@ -251,7 +251,7 @@
     "precio": "PEN 1800.00",
     "descripcion": "Laptop HP ProBook con procesador i7 y 1TB SSD.",
     "categoria": "Laptops y Accesorios",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 31,
@@ -910,7 +910,7 @@
     "precio": "PEN 119.99",
     "descripcion": "Teclado inalámbrico Logitech K400 Plus con touchpad integrado.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 125,
@@ -918,7 +918,7 @@
     "precio": "PEN 58.00",
     "descripcion": "Kit alámbrico de teclado y mouse Logitech MK120.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 126,
@@ -926,7 +926,7 @@
     "precio": "PEN 50.00",
     "descripcion": "Teclado gamer ENKORE Epsilon con retroiluminación.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 127,
@@ -934,7 +934,7 @@
     "precio": "PEN 40.00",
     "descripcion": "Combo de mouse gamer y mouse pad HALION 4D Cobra.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 128,
@@ -942,7 +942,7 @@
     "precio": "PEN 72.00",
     "descripcion": "Teclado inalámbrico CYBERTEL para Smart TV.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 129,
@@ -950,7 +950,7 @@
     "precio": "PEN 60.00",
     "descripcion": "Mouse inalámbrico Microsoft SOURIS 1850 en color negro.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 130,
@@ -958,7 +958,7 @@
     "precio": "PEN 60.00",
     "descripcion": "Combo alámbrico TEROS que incluye teclado, mouse y parlante.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 131,
@@ -966,7 +966,7 @@
     "precio": "PEN 59.99",
     "descripcion": "Mouse Bluetooth AVATEC con DPI de 1600.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 132,
@@ -974,7 +974,7 @@
     "precio": "PEN 15.00",
     "descripcion": "Mouse ENKORE Pivot con conexión USB.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 133,
@@ -982,7 +982,7 @@
     "precio": "PEN 48.00",
     "descripcion": "Teclado alámbrico Micronics Milano en color plomo.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 134,
@@ -990,7 +990,7 @@
     "precio": "PEN 50.00",
     "descripcion": "Kit alámbrico de teclado y mouse Genius KM-160 en color negro.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 135,
@@ -998,7 +998,7 @@
     "precio": "PEN 69.00",
     "descripcion": "Mouse inalámbrico Genius Micro Traveler 9000R en color verde.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1007,7 +1007,7 @@
     "precio": "PEN 80.00",
     "descripcion": "Kit de teclado y mouse CYBERTEL Twister con conexión USB.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1016,7 +1016,7 @@
     "precio": "PEN 30.00",
     "descripcion": "Teclado alámbrico CYBERTEL Ebony en color negro.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1025,7 +1025,7 @@
     "precio": "PEN 15.00",
     "descripcion": "Mouse CYBERTEL Storm X en color azul con DPI de 1000.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1034,7 +1034,7 @@
     "precio": "PEN 115.00",
     "descripcion": "Teclado alámbrico mecánico gamer ENKORE Kingdom.",
     "categoria": "Mouse / Teclado / Pad Mouse / Kit",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1043,7 +1043,7 @@
     "precio": "PEN 40.00",
     "descripcion": "Combo de mouse gamer y mouse pad Cybertel Scorpion.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1052,7 +1052,7 @@
     "precio": "PEN 3200.00",
     "descripcion": "Procesador AMD Ryzen.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1061,7 +1061,7 @@
     "precio": "PEN 15.00",
     "descripcion": "Mousepad con muñequera y diseño.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1070,7 +1070,7 @@
     "precio": "PEN 30.00",
     "descripcion": "Bandeja para segundo disco duro en laptops, caddy de 12.7 mm.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1079,7 +1079,7 @@
     "precio": "PEN 45.00",
     "descripcion": "Gamepad ENKORE con 12 botones y vibración, compatible con PC, PS2 y PS3.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1088,7 +1088,7 @@
     "precio": "PEN 50.00",
     "descripcion": "Gamepad inalámbrico ENKORE con 12 botones y vibración, compatible con PC, PS2 y PS3.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1097,7 +1097,7 @@
     "precio": "PEN 49.00",
     "descripcion": "Mando inalámbrico CYBERTEL KILLER con 14 botones y vibración, compatible con PC y iOS.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1106,7 +1106,7 @@
     "precio": "PEN 30.00",
     "descripcion": "Mini altavoz Bluetooth con diseño de Minions.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1115,7 +1115,7 @@
     "precio": "PEN 29.00",
     "descripcion": "Mochila TEROS de 15.6 pulgadas en colores celeste y azul.",
     "categoria": "OFERTAS",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
 
   },
   {
@@ -1124,7 +1124,7 @@
     "precio": "PEN 259.00",
     "descripcion": "Tablet ADVANCE de 7\" con resolución IPS, Android 9, 16GB de almacenamiento y 1GB de RAM.",
     "categoria": "Tablets y Celulares",
-    "image_url": "/images/img4.png"
+    "image_url": "https://hdcompany-chatbot.onrender.com/images/img4.png"
   },
   {
     "id": 150,
