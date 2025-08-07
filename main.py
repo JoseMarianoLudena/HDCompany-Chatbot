@@ -306,8 +306,7 @@ class DashboardMessage(BaseModel):
 # Crear tablas en la base de datos y usuario predeterminado
 async def init_db():
     async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
+        await conn.run_sync(Base.metadata.create_all)  # ✅ Crea sin borrar
         print("Tablas creadas:", Base.metadata.tables.keys())
     async with AsyncSessionLocal() as session:
         user = await session.execute(User.__table__.select().where(User.username == "admin"))
