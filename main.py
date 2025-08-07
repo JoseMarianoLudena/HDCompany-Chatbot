@@ -15,13 +15,13 @@ from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.messages import HumanMessage, AIMessage
 from crewai import Agent, Task, Crew
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, ForeignKey, Float
 from sqlalchemy.sql import func
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine # noqa
 import socketio
-import aiosqlite
+import aiosqlite # noqa
 from passlib.context import CryptContext
 from contextlib import asynccontextmanager
 from sqlalchemy import select
