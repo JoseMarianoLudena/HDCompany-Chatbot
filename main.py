@@ -28,6 +28,8 @@ from sqlalchemy import select
 from pydantic import BaseModel, Field
 from typing import Union
 import re
+import asyncio
+
 
 # Cargar variables de entorno
 load_dotenv()
@@ -316,12 +318,12 @@ async def init_db():
             await session.commit()
 
 # Manejador de ciclo de vida para FastAPI
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await init_db()
-    yield
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     await init_db()
+#     yield
 
-app.lifespan = lifespan
+# app.lifespan = lifespan
 
 # Socket.IO eventos
 @sio.event
@@ -838,6 +840,11 @@ async def process_message(message: WhatsAppMessage):
 @app.get("/")
 async def root():
     return RedirectResponse(url="/login", status_code=303)
+
+@app.on_event("startup")
+async def run_init_db():
+    print("🔧 Ejecutando init_db() desde @app.on_event startup")
+    await init_db()
 
 
 if __name__ == "__main__":
