@@ -1,4 +1,4 @@
-fastapi==0.103.1
+fastapi==0.111.0
 sqlalchemy==2.0.20
 python-dotenv==1.0.0
 langchain==0.3.27
