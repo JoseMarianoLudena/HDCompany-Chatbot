@@ -1,5 +1,5 @@
 fastapi==0.111.0
-sqlalchemy==2.0.20
+sqlalchemy==2.0.35
 fastapi-users==14.0.1
 fastapi-users-db-sqlalchemy==5.0.0
 uvicorn==0.23.2
@@ -14,3 +14,4 @@ langsmith==0.3.45
 crewai==0.152.0
 psycopg2-binary==2.9.9
 aiosqlite==0.20.0
+passlib==1.7.4
