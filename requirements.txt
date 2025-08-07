@@ -12,4 +12,3 @@ langsmith==0.3.45
 crewai==0.152.0
 psycopg2-binary==2.9.9
 aiosqlite==0.20.0
-sqlalchemy==2.0.23
