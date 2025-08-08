@@ -865,7 +865,7 @@ async def process_message(message: WhatsAppMessage):
                                     "text": f"😊 {response_text}"
                                 },
                                 "action": {
-                                    "button": "Opciones",
+                                    "button": "Ver",  # Cambiado de "Opciones" a "Ver" (3 caracteres)
                                     "sections": [
                                         {
                                             "title": "Categorías",
