@@ -875,7 +875,7 @@ async def process_message(message: WhatsAppMessage):
                                                 {"id": "impresoras", "title": "Impresoras"},
                                                 {"id": "accesorios", "title": "Accesorios"},
                                                 {"id": "soporte", "title": "Soporte"},
-                                                {"id": "agente", "title": "Agente Humano"}
+                                                {"id": "agente", "title": "Agente"}
                                             ]
                                         }
                                     ]
@@ -892,9 +892,9 @@ async def process_message(message: WhatsAppMessage):
                                 },
                                 "action": {
                                     "buttons": [
-                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar al carrito"}},
-                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver la imagen"}},
-                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir viendo"}}
+                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar"}},
+                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver Img"}},
+                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir"}}
                                     ]
                                 }
                             }
@@ -910,8 +910,8 @@ async def process_message(message: WhatsAppMessage):
                                 "action": {
                                     "buttons": [
                                         {"type": "reply", "reply": {"id": "pay", "title": "1) Pagar"}},
-                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "2) Seguir viendo"}},
-                                        {"type": "reply", "reply": {"id": "view_cart_images", "title": "3) Ver imagen(es) del carrito"}}
+                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "2) Seguir"}},
+                                        {"type": "reply", "reply": {"id": "view_cart_images", "title": "3) Ver Img"}}
                                     ]
                                 }
                             }
@@ -926,9 +926,9 @@ async def process_message(message: WhatsAppMessage):
                                 },
                                 "action": {
                                     "buttons": [
-                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar al carrito"}},
-                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver la imagen"}},
-                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir viendo"}}
+                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar"}},
+                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver Img"}},
+                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir"}}
                                     ]
                                 }
                             }
