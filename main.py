@@ -32,7 +32,6 @@ import re
 import asyncio
 import unicodedata
 
-
 # Cargar variables de entorno
 load_dotenv()
 
@@ -176,13 +175,12 @@ except json.JSONDecodeError as e:
     print(f"Error al decodificar faqs.json: {e}. Creando una lista vacía.")
     faqs = []
 
-
 def normalize_text(text: str) -> str:
     """Normaliza texto para comparación insensible a mayúsculas, tildes y comillas."""
     if not text:
         return ""
     text = unicodedata.normalize('NFKD', text)
-    text = text.replace("″", '"').replace(""", '"').replace(""", '"')
+    text = text.replace("″", '"').replace("“", '"').replace("”", '"')
     return text.strip().lower()
 
 def match_product_name(cart_name: str, product_name: str) -> bool:
@@ -316,113 +314,16 @@ class WhatsAppMessage(BaseModel):
     def get_message_content(self) -> str | None:
         if self.message_type == "list_type" and self.list_reply:
             return self.list_reply.get("id")
-        # NUEVO: Manejar respuestas de botones
-        if self.message_type == "button" and self.button_id:
-            return self.button_id
         return self.message_body or self.text
     
     def get_from_number(self) -> str:
-        # Asegura que siempre devuelve un string, usando from_ si from_number está vacío
+    # Asegura que siempre devuelve un string, usando from_ si from_number está vacío
         return (self.from_number or getattr(self, "from_", None) or "").strip()
 
 # Modelo Pydantic para mensajes del dashboard
 class DashboardMessage(BaseModel):
     user_phone: str
     message: str
-
-# NUEVA FUNCIÓN: Crear mensaje con botones de WhatsApp
-def create_welcome_buttons_message(client_name: str = ""):
-    """Crea un mensaje con botones interactivos para WhatsApp"""
-    welcome_text = f"😊 ¡Hola{', ' + client_name if client_name and client_name != 'Desconocido' else ''}! Soy el asistente de HD Company. ¿En qué te ayudo hoy?"
-    
-    return {
-        "type": "interactive",
-        "interactive": {
-            "type": "button",
-            "body": {
-                "text": welcome_text
-            },
-            "action": {
-                "buttons": [
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "ofertas",
-                            "title": "🔥 Ofertas"
-                        }
-                    },
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "laptops",
-                            "title": "💻 Laptops"
-                        }
-                    },
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "impresoras",
-                            "title": "🖨️ Impresoras"
-                        }
-                    }
-                ]
-            }
-        }
-    }
-
-def create_more_options_buttons():
-    """Crea botones adicionales para más opciones"""
-    return {
-        "type": "interactive",
-        "interactive": {
-            "type": "button",
-            "body": {
-                "text": "Más opciones disponibles:"
-            },
-            "action": {
-                "buttons": [
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "accesorios",
-                            "title": "🔌 Accesorios"
-                        }
-                    },
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "soporte",
-                            "title": "🛠️ Soporte"
-                        }
-                    },
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "agente",
-                            "title": "👨‍💼 Agente"
-                        }
-                    }
-                ]
-            }
-        }
-    }
-
-# NUEVA FUNCIÓN: Manejar respuestas de botones
-def handle_button_response(button_id: str, client_name: str = ""):
-    """Maneja las respuestas de los botones interactivos"""
-    button_responses = {
-        "ofertas": lambda: format_products_response(search_products("ofertas"), "ofertas"),
-        "laptops": lambda: format_products_response(search_products("laptops"), "laptops"),
-        "impresoras": lambda: format_products_response(search_products("impresoras"), "impresoras"),
-        "accesorios": f"📋 Categorías de accesorios: Case, Cámaras, Discos, Monitores, Mouse y Teclado, Tarjetas de Video, Tablets. ¿Cuál quieres ver, {client_name if client_name != 'Desconocido' else 'Ko'}?",
-        "soporte": f"📅 Agendar soporte técnico: https://calendly.com/hdcompany/soporte. ¿En qué te ayudo ahora, {client_name if client_name != 'Desconocido' else 'Ko'}?",
-        "agente": "🔔 Te conecto con un agente. ¡Un momento! 😊"
-    }
-    
-    response = button_responses.get(button_id)
-    if callable(response):
-        return response()
-    return response
 
 # Crear tablas en la base de datos y usuario predeterminado
 async def init_db():
@@ -435,6 +336,14 @@ async def init_db():
             hashed_password = pwd_context.hash("admin123")
             session.add(User(username="admin", hashed_password=hashed_password))
             await session.commit()
+
+# Manejador de ciclo de vida para FastAPI
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     await init_db()
+#     yield
+
+# app.lifespan = lifespan
 
 # Socket.IO eventos
 @sio.event
@@ -561,8 +470,6 @@ async def process_message(message: WhatsAppMessage):
         from_number = message.get_from_number()
         print(f"Mensaje: {user_input}")
         print(f"Número: {from_number}")
-        print(f"Tipo de mensaje: {message.message_type}")
-        
         if not from_number:
             raise HTTPException(status_code=400, detail="Número de teléfono requerido")
 
@@ -618,54 +525,7 @@ async def process_message(message: WhatsAppMessage):
                         session.add(client)
                         session.add(conv)
                         await session.commit()
-                        
-                        # NUEVO: Enviar mensaje con botones después de obtener el nombre
-                        welcome_message = create_welcome_buttons_message(client.name)
-                        bot_message = Message(
-                            conversation_id=conv.id,
-                            sender="agent",
-                            message=json.dumps(welcome_message),
-                            timestamp=datetime.utcnow()
-                        )
-                        session.add(bot_message)
-                        await session.commit()
-                        await sio.emit("new_message", {
-                            "user_phone": from_number,
-                            "name": conv.name,
-                            "is_group": conv.is_group,
-                            "group_id": conv.group_id,
-                            "state": conv.state,
-                            "escalated": conv.escalated,
-                            "message": json.dumps(welcome_message),
-                            "sender": "agent",
-                            "timestamp": datetime.utcnow().isoformat(),
-                            "active_poll": None
-                        })
-                        
-                        # Enviar también el mensaje con más opciones
-                        more_options = create_more_options_buttons()
-                        bot_message_2 = Message(
-                            conversation_id=conv.id,
-                            sender="agent",
-                            message=json.dumps(more_options),
-                            timestamp=datetime.utcnow()
-                        )
-                        session.add(bot_message_2)
-                        await session.commit()
-                        await sio.emit("new_message", {
-                            "user_phone": from_number,
-                            "name": conv.name,
-                            "is_group": conv.is_group,
-                            "group_id": conv.group_id,
-                            "state": conv.state,
-                            "escalated": conv.escalated,
-                            "message": json.dumps(more_options),
-                            "sender": "agent",
-                            "timestamp": datetime.utcnow().isoformat(),
-                            "active_poll": None
-                        })
-                        
-                        return [welcome_message, more_options]
+                        response_body = f"😊 ¡Hola, {client.name}! Soy el asistente de HD Company. ¿En qué te ayudo hoy? Escribe: Ofertas, Laptops, Impresoras, Accesorios, Soporte, Agente."
                     else:
                         response_body = "😊 Por favor, dime tu nombre para continuar."
 
@@ -692,56 +552,6 @@ async def process_message(message: WhatsAppMessage):
                 return {
                     "type": "text",
                     "body": response_body
-                }
-
-            # NUEVO: Manejar respuestas de botones
-            if message.message_type == "button" and user_input:
-                button_response = handle_button_response(user_input, conv.name)
-                
-                # Si es solicitud de agente, manejar escalamiento
-                if user_input == "agente":
-                    conv.escalated = "True"
-                    conv.state = "escalated"
-                    await session.commit()
-                    
-                    # Notificar al agente
-                    import requests
-                    endpoint = f"https://graph.facebook.com/v20.0/{os.getenv('WHATSAPP_PHONE_NUMBER_ID')}/messages"
-                    headers = {
-                        "Authorization": f"Bearer {os.getenv('WHATSAPP_ACCESS_TOKEN')}",
-                        "Content-Type": "application/json"
-                    }
-                    payload = {
-                        "messaging_product": "whatsapp",
-                        "to": os.getenv("AGENT_PHONE_NUMBER", "+51992436107").replace("whatsapp:", ""),
-                        "type": "text",
-                        "text": {"body": f"🔔 Nueva solicitud de agente humano!\nUsuario: {from_number}\nNombre: {conv.name}"}
-                    }
-                    requests.post(endpoint, json=payload, headers=headers)
-                
-                bot_message = Message(
-                    conversation_id=conv.id,
-                    sender="agent",
-                    message=button_response,
-                    timestamp=datetime.utcnow()
-                )
-                session.add(bot_message)
-                await session.commit()
-                await sio.emit("new_message", {
-                    "user_phone": from_number,
-                    "name": conv.name,
-                    "is_group": conv.is_group,
-                    "group_id": conv.group_id,
-                    "state": conv.state,
-                    "escalated": conv.escalated,
-                    "message": button_response,
-                    "sender": "agent",
-                    "timestamp": datetime.utcnow().isoformat(),
-                    "active_poll": None
-                })
-                return {
-                    "type": "text",
-                    "body": button_response
                 }
 
             # Manejar estado escalado
@@ -803,7 +613,7 @@ async def process_message(message: WhatsAppMessage):
                     "body": response_body
                 }
 
-            # Manejar solicitud de agente (texto)
+            # Manejar solicitud de agente
             if user_input.lower() in ["agente", "humano", "persona", "hablar con alguien"]:
                 conv.escalated = "True"
                 conv.state = "escalated"
@@ -853,28 +663,15 @@ async def process_message(message: WhatsAppMessage):
                 conv.escalated = "False"
                 conv.state = "active"
                 await session.commit()
-                
-                # NUEVO: Enviar botones cuando regresa del escalamiento
-                welcome_message = create_welcome_buttons_message(conv.name)
-                more_options = create_more_options_buttons()
-                
-                bot_message_1 = Message(
+                response_body = f"¡Perfecto, {conv.name}! 😊 ¿En qué te ayudo ahora? Escribe: Ofertas, Laptops, Impresoras, Accesorios, Soporte, Agente."
+                bot_message = Message(
                     conversation_id=conv.id,
                     sender="agent",
-                    message=json.dumps(welcome_message),
+                    message=response_body,
                     timestamp=datetime.utcnow()
                 )
-                session.add(bot_message_1)
-                
-                bot_message_2 = Message(
-                    conversation_id=conv.id,
-                    sender="agent",
-                    message=json.dumps(more_options),
-                    timestamp=datetime.utcnow()
-                )
-                session.add(bot_message_2)
+                session.add(bot_message)
                 await session.commit()
-                
                 await sio.emit("new_message", {
                     "user_phone": from_number,
                     "name": conv.name,
@@ -882,28 +679,17 @@ async def process_message(message: WhatsAppMessage):
                     "group_id": conv.group_id,
                     "state": conv.state,
                     "escalated": conv.escalated,
-                    "message": json.dumps(welcome_message),
+                    "message": response_body,
                     "sender": "agent",
                     "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
-                
-                await sio.emit("new_message", {
-                    "user_phone": from_number,
-                    "name": conv.name,
-                    "is_group": conv.is_group,
-                    "group_id": conv.group_id,
-                    "state": conv.state,
-                    "escalated": conv.escalated,
-                    "message": json.dumps(more_options),
-                    "sender": "agent",
-                    "timestamp": datetime.utcnow().isoformat(),
-                    "active_poll": None
-                })
-                
-                return [welcome_message, more_options]
+                return {
+                    "type": "text",
+                    "body": response_body
+                }
 
-            # Manejar consultas de categorías (MANTENER funcionalidad de texto)
+            # Manejar consultas de categorías
             category_map = {
                 "laptops": ("Laptops y Accesorios", "laptops"),
                 "impresoras": ("Impresoras y Accesorios", "impresoras"),
@@ -957,7 +743,7 @@ async def process_message(message: WhatsAppMessage):
                 conversation_context += f"{msg.sender}: {msg.message}\n"
 
             # Ajustar URLs relativas a absolutas
-            base_url = "https://hdcompany-chatbot.onrender.com"  # Reemplaza con tu dominio real
+            base_url = "https://hdcompany-chatbot.onrender.com"
             products_with_absolute_urls = []
             for product in products:
                 img_url = product.get('image_url', '')
@@ -970,11 +756,8 @@ async def process_message(message: WhatsAppMessage):
             products_context = f"Productos disponibles: {json.dumps(products_with_absolute_urls, ensure_ascii=False)}"
 
             # Construir contexto del carrito
-            cart_items = await session.execute(
-                select(Cart).where(Cart.user_phone == from_number)
-            )
+            cart_items = await session.execute(select(Cart).where(Cart.user_phone == from_number))
             cart_items = cart_items.scalars().all()
-
             # Buscar producto recientemente mencionado aunque no esté en el carrito
             last_selected = None
             for msg in reversed(previous_messages):
@@ -997,7 +780,7 @@ async def process_message(message: WhatsAppMessage):
                         ),
                         'No disponible'
                     )
-                    cart_lines.append(f"{item.product_name}: PEN {item.product_price}, Imagen: {imagen_url}")
+                cart_lines.append(f"{item.product_name}: PEN {item.product_price}, Imagen: {imagen_url}")
                 cart_context = "Carrito actual del usuario:\n" + "\n".join(cart_lines)
             elif last_selected:
                 matched = next(
@@ -1010,12 +793,9 @@ async def process_message(message: WhatsAppMessage):
                     cart_context = "Carrito vacío"
             else:
                 cart_context = "Carrito vacío"
-
             # Si el usuario pide ver imagen, enviarla directamente si la encontramos
             if user_input and 'ver' in user_input.lower() and 'imagen' in user_input.lower():
                 image_to_send = None
-
-                # Buscar en carrito
                 if cart_items:
                     for item in cart_items:
                         imagen_url = next(
@@ -1025,8 +805,6 @@ async def process_message(message: WhatsAppMessage):
                         if imagen_url and imagen_url != 'No disponible':
                             image_to_send = imagen_url
                             break
-
-                # Si no está en carrito, buscar en producto seleccionado
                 if not image_to_send and last_selected:
                     matched = next(
                         (p for p in products_with_absolute_urls if match_product_name(last_selected, p['nombre'])),
@@ -1034,13 +812,13 @@ async def process_message(message: WhatsAppMessage):
                     )
                     if matched and matched.get('image_url'):
                         image_to_send = matched['image_url']
-
                 if image_to_send:
                     return {
                         "type": "image",
                         "image": {"link": image_to_send},
                         "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
-                    }   
+                    }
+
             try:
                 messages = [
                     {"role": "system", "content": create_system_prompt()},
@@ -1049,7 +827,6 @@ async def process_message(message: WhatsAppMessage):
                 response = await llm.ainvoke(messages)
                 response_text = response.content
 
-                # Detectar si la respuesta es una imagen o una lista de imágenes
                 image_url_match = re.match(r'.*?(https?://[^\s]+(?:\.png|\.jpg|\.jpeg|\.gif))', response_text)
                 image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
 
@@ -1057,9 +834,7 @@ async def process_message(message: WhatsAppMessage):
                     image_url = image_url_match.group(1).strip()
                     response_body = {
                         "type": "image",
-                        "image": {
-                            "link": image_url
-                        },
+                        "image": {"link": image_url},
                         "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                     }
                 elif image_list_match:
@@ -1071,9 +846,7 @@ async def process_message(message: WhatsAppMessage):
                             if image_url != 'No disponible':
                                 response_body.append({
                                     "type": "image",
-                                    "image": {
-                                        "link": image_url.strip()
-                                    },
+                                    "image": {"link": image_url.strip()},
                                     "caption": f"🖼️ Imagen de {product_name}"
                                 })
                     if not response_body:
@@ -1082,26 +855,106 @@ async def process_message(message: WhatsAppMessage):
                             "body": f"🖼️ Tu carrito está vacío o no hay imágenes disponibles. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                         }
                 else:
-                    response_body = {
-                        "type": "text",
-                        "body": f"📝 {response_text}"
-                    }
-                # Procesar respuesta del LLM para detectar acciones como agregar al carrito
-                if "Producto agregado al carrito" in response_text:
-                    product_name_match = re.search(r"has seleccionado (.+?)\.", response_text)
-                    if product_name_match:
-                        product_name = product_name_match.group(1)
-                        for product in products:
-                            if product['nombre'] == product_name:
-                                cart_item = Cart(
-                                    user_phone=from_number,
-                                    product_name=product['nombre'],
-                                    product_price=float(product['precio'].replace("PEN ", "")),
-                                    added_at=datetime.utcnow()
-                                )
-                                session.add(cart_item)
-                                await session.commit()
-                                break
+                    # Añadir botones según el contexto
+                    if "¡Hola de nuevo!" in response_text or "En qué te ayudo ahora" in response_text:
+                        response_body = {
+                            "type": "interactive",
+                            "interactive": {
+                                "type": "list",
+                                "body": {
+                                    "text": f"😊 {response_text}"
+                                },
+                                "action": {
+                                    "button": "Opciones",
+                                    "sections": [
+                                        {
+                                            "title": "Categorías",
+                                            "rows": [
+                                                {"id": "ofertas", "title": "Ofertas"},
+                                                {"id": "laptops", "title": "Laptops"},
+                                                {"id": "impresoras", "title": "Impresoras"},
+                                                {"id": "accesorios", "title": "Accesorios"},
+                                                {"id": "soporte", "title": "Soporte"},
+                                                {"id": "agente", "title": "Agente Humano"}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    elif "has seleccionado" in response_text and "carrito" not in response_text:
+                        response_body = {
+                            "type": "interactive",
+                            "interactive": {
+                                "type": "button",
+                                "body": {
+                                    "text": f"📝 {response_text}"
+                                },
+                                "action": {
+                                    "buttons": [
+                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar al carrito"}},
+                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver la imagen"}},
+                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir viendo"}}
+                                    ]
+                                }
+                            }
+                        }
+                    elif "Producto agregado al carrito" in response_text:
+                        response_body = {
+                            "type": "interactive",
+                            "interactive": {
+                                "type": "button",
+                                "body": {
+                                    "text": f"📝 {response_text}"
+                                },
+                                "action": {
+                                    "buttons": [
+                                        {"type": "reply", "reply": {"id": "pay", "title": "1) Pagar"}},
+                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "2) Seguir viendo"}},
+                                        {"type": "reply", "reply": {"id": "view_cart_images", "title": "3) Ver imagen(es) del carrito"}}
+                                    ]
+                                }
+                            }
+                        }
+                    elif "Imagen solicitada" in response_text:
+                        response_body = {
+                            "type": "interactive",
+                            "interactive": {
+                                "type": "button",
+                                "body": {
+                                    "text": f"🖼️ {response_text}"
+                                },
+                                "action": {
+                                    "buttons": [
+                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar al carrito"}},
+                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver la imagen"}},
+                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir viendo"}}
+                                    ]
+                                }
+                            }
+                        }
+                    else:
+                        response_body = {
+                            "type": "text",
+                            "body": f"📝 {response_text}"
+                        }
+
+                    if "Producto agregado al carrito" in response_text:
+                        product_name_match = re.search(r"has seleccionado (.+?)\.", response_text)
+                        if product_name_match:
+                            product_name = product_name_match.group(1)
+                            for product in products:
+                                if product['nombre'] == product_name:
+                                    cart_item = Cart(
+                                        user_phone=from_number,
+                                        product_name=product['nombre'],
+                                        product_price=float(product['precio'].replace("PEN ", "")),
+                                        added_at=datetime.utcnow()
+                                    )
+                                    session.add(cart_item)
+                                    await session.commit()
+                                    break
+
             except FileNotFoundError:
                 response_text = f"🛠️ Lo siento, estamos en mantenimiento. Por favor, intenta de nuevo más tarde. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                 response_body = {
@@ -1124,7 +977,7 @@ async def process_message(message: WhatsAppMessage):
                 "group_id": conv.group_id,
                 "state": conv.state,
                 "escalated": conv.escalated,
-                "message": response_text if isinstance(response_body, dict) and response_body['type'] == 'text' else json.dumps(response_body),
+                "message": response_text if response_body['type'] == 'text' else json.dumps(response_body),
                 "sender": "agent",
                 "timestamp": datetime.utcnow().isoformat(),
                 "active_poll": None
@@ -1150,7 +1003,8 @@ async def run_init_db():
     print("🔧 Ejecutando init_db() desde @app.on_event startup")
     await init_db()
 
-
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
