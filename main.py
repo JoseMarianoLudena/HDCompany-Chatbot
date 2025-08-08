@@ -764,6 +764,17 @@ async def process_message(message: WhatsAppMessage):
             )
             cart_items = cart_items.scalars().all()
 
+            # Buscar producto recientemente mencionado aunque no esté en el carrito
+            last_selected = None
+            for msg in reversed(previous_messages):
+                if msg.sender == 'agent' and isinstance(msg.message, str):
+                    m = re.search(r'has seleccionado.*\*\*(.+?)\*\*', msg.message, re.IGNORECASE)
+                    if not m:
+                        m = re.search(r'has seleccionado (?:la |el )?(.+?)(?:\.|$)', msg.message, re.IGNORECASE)
+                    if m:
+                        last_selected = m.group(1).strip()
+                        break
+
             if cart_items:
                 cart_lines = []
                 for item in cart_items:
@@ -777,9 +788,48 @@ async def process_message(message: WhatsAppMessage):
                     )
                     cart_lines.append(f"{item.product_name}: PEN {item.product_price}, Imagen: {imagen_url}")
                 cart_context = "Carrito actual del usuario:\n" + "\n".join(cart_lines)
+            elif last_selected:
+                matched = next(
+                    (p for p in products_with_absolute_urls if match_product_name(last_selected, p['nombre'])),
+                    None
+                )
+                if matched and matched.get('image_url'):
+                    cart_context = f"Producto seleccionado: {matched['nombre']}: {matched.get('precio','')}, Imagen: {matched['image_url']}"
+                else:
+                    cart_context = "Carrito vacío"
             else:
                 cart_context = "Carrito vacío"
 
+            # Si el usuario pide ver imagen, enviarla directamente si la encontramos
+            if user_input and 'ver' in user_input.lower() and 'imagen' in user_input.lower():
+                image_to_send = None
+
+                # Buscar en carrito
+                if cart_items:
+                    for item in cart_items:
+                        imagen_url = next(
+                            (p['image_url'] for p in products_with_absolute_urls if match_product_name(item.product_name, p['nombre'])),
+                            None
+                        )
+                        if imagen_url and imagen_url != 'No disponible':
+                            image_to_send = imagen_url
+                            break
+
+                # Si no está en carrito, buscar en producto seleccionado
+                if not image_to_send and last_selected:
+                    matched = next(
+                        (p for p in products_with_absolute_urls if match_product_name(last_selected, p['nombre'])),
+                        None
+                    )
+                    if matched and matched.get('image_url'):
+                        image_to_send = matched['image_url']
+
+                if image_to_send:
+                    return {
+                        "type": "image",
+                        "image": {"link": image_to_send},
+                        "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
+                    }   
             try:
                 messages = [
                     {"role": "system", "content": create_system_prompt()},
