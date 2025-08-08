@@ -176,8 +176,10 @@ except json.JSONDecodeError as e:
     print(f"Error al decodificar faqs.json: {e}. Creando una lista vacía.")
     faqs = []
 
-def normalize_text(text):
-    # Pasar a minúsculas, quitar tildes y normalizar comillas
+def normalize_text(text: str) -> str:
+    """Normaliza texto para comparación insensible a mayúsculas, tildes y comillas."""
+    if not text:
+        return ""
     text = unicodedata.normalize('NFKD', text)
     text = text.replace("″", '"').replace("“", '"').replace("”", '"')
     return text.strip().lower()
@@ -723,36 +725,50 @@ async def process_message(message: WhatsAppMessage):
 
 
             # Consultas genéricas con LLM (incluye selección de productos, ver imagen, agregar al carrito)
-            # Consultas genéricas con LLM (incluye selección de productos, ver imagen, agregar al carrito)
-            
-            chat_history = get_chat_history(from_number)
+            # Obtener contexto de conversación previa
             previous_messages = await session.execute(
                 select(Message).where(Message.conversation_id == conv.id).order_by(Message.timestamp.desc()).limit(10)
             )
             previous_messages = previous_messages.scalars().all()
+
             conversation_context = "Historial de conversación reciente:\n"
             for msg in reversed(previous_messages[1:]):
                 conversation_context += f"{msg.sender}: {msg.message}\n"
-            chat_history.add_message(HumanMessage(content=user_input))
             # Ajustar URLs relativas a absolutas
             base_url = "https://hdcompany-chatbot.onrender.com"  # Reemplaza con tu dominio real
-            products_with_absolute_urls = [
-                {**product, "image_url": f"{base_url}{product['image_url']}" if product.get('image_url') and product['image_url'].startswith('/') else product.get('image_url', '')}
-                for product in products
-            ]
+            products_with_absolute_urls = []
+            for product in products:
+                img_url = product.get('image_url', '')
+                if img_url and not img_url.startswith('http'):
+                    if not img_url.startswith('/'):
+                        img_url = '/' + img_url
+                    img_url = f"{base_url}{img_url}"
+                products_with_absolute_urls.append({**product, "image_url": img_url or product.get('image_url', '')})
+
             products_context = f"Productos disponibles: {json.dumps(products_with_absolute_urls, ensure_ascii=False)}"
+
+            # Construir contexto del carrito
             cart_items = await session.execute(
                 select(Cart).where(Cart.user_phone == from_number)
             )
             cart_items = cart_items.scalars().all()
-            cart_context = "Carrito actual del usuario:\n" + "\n".join([
-                f"{item.product_name}: PEN {item.product_price}, Imagen: {next((
-                    p['image_url']
-                    for p in products_with_absolute_urls
-                    if normalize_text(p['nombre']) == normalize_text(item.product_name)
-                ), 'No disponible')}"
-                for item in cart_items
-            ]) if cart_items else "Carrito vacío"
+
+            if cart_items:
+                cart_lines = []
+                for item in cart_items:
+                    imagen_url = next(
+                        (
+                            p['image_url']
+                            for p in products_with_absolute_urls
+                            if normalize_text(p['nombre']) == normalize_text(item.product_name)
+                        ),
+                        'No disponible'
+                    )
+                    cart_lines.append(f"{item.product_name}: PEN {item.product_price}, Imagen: {imagen_url}")
+                cart_context = "Carrito actual del usuario:\n" + "\n".join(cart_lines)
+            else:
+                cart_context = "Carrito vacío"
+
             try:
                 messages = [
                     {"role": "system", "content": create_system_prompt()},
@@ -760,17 +776,19 @@ async def process_message(message: WhatsAppMessage):
                 ]
                 response = await llm.ainvoke(messages)
                 response_text = response.content
+
                 # Detectar si la respuesta es una imagen o una lista de imágenes
-                image_url_match = re.match(r'🖼️ (https?://[^\s]+)', response_text)
+                image_url_match = re.match(r'.*?(https?://[^\s]+(?:\.png|\.jpg|\.jpeg|\.gif))', response_text)
                 image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
-                if image_url_match:
-                    image_url = image_url_match.group(1)
+
+                if image_url_match and not image_list_match:
+                    image_url = image_url_match.group(1).strip()
                     response_body = {
                         "type": "image",
                         "image": {
                             "link": image_url
                         },
-                        "caption": f"🖼️ Imagen de {response_text.split(']')[0].split('[')[-1]}. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
+                        "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                     }
                 elif image_list_match:
                     image_lines = image_list_match.group(1).split('\n')
