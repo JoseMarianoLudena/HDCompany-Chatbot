@@ -30,6 +30,7 @@ from pydantic import BaseModel, Field
 from typing import Union
 import re
 import asyncio
+import unicodedata
 
 
 # Cargar variables de entorno
@@ -174,6 +175,12 @@ except FileNotFoundError:
 except json.JSONDecodeError as e:
     print(f"Error al decodificar faqs.json: {e}. Creando una lista vacía.")
     faqs = []
+
+def normalize_text(text):
+    # Pasar a minúsculas, quitar tildes y normalizar comillas
+    text = unicodedata.normalize('NFKD', text)
+    text = text.replace("″", '"').replace("“", '"').replace("”", '"')
+    return text.strip().lower()
 
 # Función para buscar productos por categoría o palabra clave
 def search_products(query: str, category: str = None):
@@ -738,8 +745,12 @@ async def process_message(message: WhatsAppMessage):
                 select(Cart).where(Cart.user_phone == from_number)
             )
             cart_items = cart_items.scalars().all()
-            cart_context = f"Carrito actual del usuario:\n" + "\n".join([
-                f"{item.product_name}: PEN {item.product_price}, Imagen: {next((p['image_url'] for p in products_with_absolute_urls if p['nombre'] == item.product_name), 'No disponible')}"
+            cart_context = "Carrito actual del usuario:\n" + "\n".join([
+                f"{item.product_name}: PEN {item.product_price}, Imagen: {next((
+                    p['image_url']
+                    for p in products_with_absolute_urls
+                    if normalize_text(p['nombre']) == normalize_text(item.product_name)
+                ), 'No disponible')}"
                 for item in cart_items
             ]) if cart_items else "Carrito vacío"
             try:
