@@ -176,6 +176,7 @@ except json.JSONDecodeError as e:
     print(f"Error al decodificar faqs.json: {e}. Creando una lista vacía.")
     faqs = []
 
+
 def normalize_text(text: str) -> str:
     """Normaliza texto para comparación insensible a mayúsculas, tildes y comillas."""
     if not text:
@@ -183,6 +184,14 @@ def normalize_text(text: str) -> str:
     text = unicodedata.normalize('NFKD', text)
     text = text.replace("″", '"').replace("“", '"').replace("”", '"')
     return text.strip().lower()
+
+def match_product_name(cart_name: str, product_name: str) -> bool:
+    """Coincide productos aunque los nombres no sean exactos, usando palabras clave."""
+    cart_name_norm = normalize_text(cart_name)
+    product_name_norm = normalize_text(product_name)
+    cart_words = set(cart_name_norm.split())
+    product_words = set(product_name_norm.split())
+    return len(cart_words & product_words) >= 3  # al menos 3 palabras en común
 
 # Función para buscar productos por categoría o palabra clave
 def search_products(query: str, category: str = None):
@@ -734,6 +743,7 @@ async def process_message(message: WhatsAppMessage):
             conversation_context = "Historial de conversación reciente:\n"
             for msg in reversed(previous_messages[1:]):
                 conversation_context += f"{msg.sender}: {msg.message}\n"
+
             # Ajustar URLs relativas a absolutas
             base_url = "https://hdcompany-chatbot.onrender.com"  # Reemplaza con tu dominio real
             products_with_absolute_urls = []
@@ -760,8 +770,7 @@ async def process_message(message: WhatsAppMessage):
                         (
                             p['image_url']
                             for p in products_with_absolute_urls
-                            if normalize_text(item.product_name) in normalize_text(p['nombre'])
-                                or normalize_text(p['nombre']) in normalize_text(item.product_name)
+                            if match_product_name(item.product_name, p['nombre'])
                         ),
                         'No disponible'
                     )
