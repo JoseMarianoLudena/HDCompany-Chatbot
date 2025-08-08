@@ -743,7 +743,7 @@ async def process_message(message: WhatsAppMessage):
                 conversation_context += f"{msg.sender}: {msg.message}\n"
 
             # Ajustar URLs relativas a absolutas
-            base_url = "https://hdcompany-chatbot.onrender.com"
+            base_url = "https://hdcompany-chatbot.onrender.com"  # Reemplaza con tu dominio real
             products_with_absolute_urls = []
             for product in products:
                 img_url = product.get('image_url', '')
@@ -756,8 +756,11 @@ async def process_message(message: WhatsAppMessage):
             products_context = f"Productos disponibles: {json.dumps(products_with_absolute_urls, ensure_ascii=False)}"
 
             # Construir contexto del carrito
-            cart_items = await session.execute(select(Cart).where(Cart.user_phone == from_number))
+            cart_items = await session.execute(
+                select(Cart).where(Cart.user_phone == from_number)
+            )
             cart_items = cart_items.scalars().all()
+
             # Buscar producto recientemente mencionado aunque no esté en el carrito
             last_selected = None
             for msg in reversed(previous_messages):
@@ -780,7 +783,7 @@ async def process_message(message: WhatsAppMessage):
                         ),
                         'No disponible'
                     )
-                cart_lines.append(f"{item.product_name}: PEN {item.product_price}, Imagen: {imagen_url}")
+                    cart_lines.append(f"{item.product_name}: PEN {item.product_price}, Imagen: {imagen_url}")
                 cart_context = "Carrito actual del usuario:\n" + "\n".join(cart_lines)
             elif last_selected:
                 matched = next(
@@ -793,9 +796,12 @@ async def process_message(message: WhatsAppMessage):
                     cart_context = "Carrito vacío"
             else:
                 cart_context = "Carrito vacío"
+
             # Si el usuario pide ver imagen, enviarla directamente si la encontramos
             if user_input and 'ver' in user_input.lower() and 'imagen' in user_input.lower():
                 image_to_send = None
+
+                # Buscar en carrito
                 if cart_items:
                     for item in cart_items:
                         imagen_url = next(
@@ -805,6 +811,8 @@ async def process_message(message: WhatsAppMessage):
                         if imagen_url and imagen_url != 'No disponible':
                             image_to_send = imagen_url
                             break
+
+                # Si no está en carrito, buscar en producto seleccionado
                 if not image_to_send and last_selected:
                     matched = next(
                         (p for p in products_with_absolute_urls if match_product_name(last_selected, p['nombre'])),
@@ -812,13 +820,13 @@ async def process_message(message: WhatsAppMessage):
                     )
                     if matched and matched.get('image_url'):
                         image_to_send = matched['image_url']
+
                 if image_to_send:
                     return {
                         "type": "image",
                         "image": {"link": image_to_send},
                         "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
-                    }
-
+                    }   
             try:
                 messages = [
                     {"role": "system", "content": create_system_prompt()},
@@ -827,130 +835,64 @@ async def process_message(message: WhatsAppMessage):
                 response = await llm.ainvoke(messages)
                 response_text = response.content
 
-                # Definir opciones según el contexto
-                menu_options = [
-                    {"id": "ofertas", "title": "Ofertas"},
-                    {"id": "laptops", "title": "Laptops"},
-                    {"id": "impresoras", "title": "Impresoras"},
-                    {"id": "accesorios", "title": "Accesorios"},
-                    {"id": "soporte", "title": "Soporte"},
-                    {"id": "agente", "title": "Agente"}
-                ]
-                recommendation_options = [
-                    {"id": "add_cart", "title": "1) Agregar"},
-                    {"id": "view_image", "title": "2) Ver Img"},
-                    {"id": "keep_browsing", "title": "3) Seguir"}
-                ]
+                # Detectar si la respuesta es una imagen o una lista de imágenes
+                image_url_match = re.match(r'.*?(https?://[^\s]+(?:\.png|\.jpg|\.jpeg|\.gif))', response_text)
+                image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
 
-                # Si es el inicio (respuesta a "Hola"), usar menú principal
-                if user_input and user_input.lower() == 'hola':
+                if image_url_match and not image_list_match:
+                    image_url = image_url_match.group(1).strip()
                     response_body = {
-                        "messaging_product": "whatsapp",
-                        "recipient_type": "individual",
-                        "to": from_number,
-                        "type": "interactive",
-                        "interactive": {
-                            "type": "list" if len(menu_options) > 3 else "button",
-                            "body": {
-                                "text": f"😊 ¡Hola, {conv.name if conv.name != 'Desconocido' else 'Ko'}! ¿En qué te ayudo hoy?"
-                            },
-                            "action": {
-                                "button": "Ver" if len(menu_options) > 3 else None,
-                                "sections": [{"title": "Categorías", "rows": menu_options}] if len(menu_options) > 3 else None,
-                                "buttons": [{"type": "reply", "reply": {"id": opt["id"], "title": opt["title"]}} for opt in menu_options] if len(menu_options) <= 3 else None
-                            }
-                        }
+                        "type": "image",
+                        "image": {
+                            "link": image_url
+                        },
+                        "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                     }
-                # Si hay recomendación (por ejemplo, producto seleccionado)
-                elif "has seleccionado" in response_text and "carrito" not in response_text:
-                    response_body = {
-                        "messaging_product": "whatsapp",
-                        "recipient_type": "individual",
-                        "to": from_number,
-                        "type": "interactive",
-                        "interactive": {
-                            "type": "button" if len(recommendation_options) <= 3 else "list",
-                            "body": {
-                                "text": f"📝 {response_text}"
-                            },
-                            "action": {
-                                "button": "Ver" if len(recommendation_options) > 3 else None,
-                                "sections": [{"title": "Opciones", "rows": recommendation_options}] if len(recommendation_options) > 3 else None,
-                                "buttons": [{"type": "reply", "reply": {"id": opt["id"], "title": opt["title"]}} for opt in recommendation_options] if len(recommendation_options) <= 3 else None
-                            }
-                        }
-                    }
-                # Otros casos (imágenes, carrito, etc.)
-                else:
-                    image_url_match = re.match(r'.*?(https?://[^\s]+(?:\.png|\.jpg|\.jpeg|\.gif))', response_text)
-                    image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
-
-                    if image_url_match and not image_list_match:
-                        image_url = image_url_match.group(1).strip()
+                elif image_list_match:
+                    image_lines = image_list_match.group(1).split('\n')
+                    response_body = []
+                    for line in image_lines:
+                        if ': ' in line:
+                            product_name, image_url = line.split(': ', 1)
+                            if image_url != 'No disponible':
+                                response_body.append({
+                                    "type": "image",
+                                    "image": {
+                                        "link": image_url.strip()
+                                    },
+                                    "caption": f"🖼️ Imagen de {product_name}"
+                                })
+                    if not response_body:
                         response_body = {
-                            "messaging_product": "whatsapp",
-                            "recipient_type": "individual",
-                            "to": from_number,
-                            "type": "image",
-                            "image": {"link": image_url},
-                            "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
-                        }
-                    elif image_list_match:
-                        image_lines = image_list_match.group(1).split('\n')
-                        response_body = []
-                        for line in image_lines:
-                            if ': ' in line:
-                                product_name, image_url = line.split(': ', 1)
-                                if image_url != 'No disponible':
-                                    response_body.append({
-                                        "messaging_product": "whatsapp",
-                                        "recipient_type": "individual",
-                                        "to": from_number,
-                                        "type": "image",
-                                        "image": {"link": image_url.strip()},
-                                        "caption": f"🖼️ Imagen de {product_name}"
-                                    })
-                        if not response_body:
-                            response_body = {
-                                "messaging_product": "whatsapp",
-                                "recipient_type": "individual",
-                                "to": from_number,
-                                "type": "text",
-                                "text": {"body": f"🖼️ Tu carrito está vacío o no hay imágenes disponibles. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"}
-                            }
-                    else:
-                        response_body = {
-                            "messaging_product": "whatsapp",
-                            "recipient_type": "individual",
-                            "to": from_number,
                             "type": "text",
-                            "text": {"body": f"📝 {response_text}"}
+                            "body": f"🖼️ Tu carrito está vacío o no hay imágenes disponibles. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                         }
-
-                    if "Producto agregado al carrito" in response_text:
-                        product_name_match = re.search(r"has seleccionado (.+?)\.", response_text)
-                        if product_name_match:
-                            product_name = product_name_match.group(1)
-                            for product in products:
-                                if product['nombre'] == product_name:
-                                    cart_item = Cart(
-                                        user_phone=from_number,
-                                        product_name=product['nombre'],
-                                        product_price=float(product['precio'].replace("PEN ", "")),
-                                        added_at=datetime.utcnow()
-                                    )
-                                    session.add(cart_item)
-                                    await session.commit()
-                                    break
-
+                else:
+                    response_body = {
+                        "type": "text",
+                        "body": f"📝 {response_text}"
+                    }
+                # Procesar respuesta del LLM para detectar acciones como agregar al carrito
+                if "Producto agregado al carrito" in response_text:
+                    product_name_match = re.search(r"has seleccionado (.+?)\.", response_text)
+                    if product_name_match:
+                        product_name = product_name_match.group(1)
+                        for product in products:
+                            if product['nombre'] == product_name:
+                                cart_item = Cart(
+                                    user_phone=from_number,
+                                    product_name=product['nombre'],
+                                    product_price=float(product['precio'].replace("PEN ", "")),
+                                    added_at=datetime.utcnow()
+                                )
+                                session.add(cart_item)
+                                await session.commit()
+                                break
             except FileNotFoundError:
                 response_text = f"🛠️ Lo siento, estamos en mantenimiento. Por favor, intenta de nuevo más tarde. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                 response_body = {
-                    "messaging_product": "whatsapp",
-                    "recipient_type": "individual",
-                    "to": from_number,
                     "type": "text",
-                    "text": {"body": response_text}
+                    "body": response_text
                 }
             chat_history.add_message(AIMessage(content=response_text))
             bot_message = Message(
@@ -968,7 +910,7 @@ async def process_message(message: WhatsAppMessage):
                 "group_id": conv.group_id,
                 "state": conv.state,
                 "escalated": conv.escalated,
-                "message": response_text if response_body['type'] == 'text' else json.dumps(response_body),
+                "message": response_text if isinstance(response_body, dict) and response_body['type'] == 'text' else json.dumps(response_body),
                 "sender": "agent",
                 "timestamp": datetime.utcnow().isoformat(),
                 "active_poll": None
