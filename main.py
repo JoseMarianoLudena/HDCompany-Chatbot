@@ -319,7 +319,8 @@ class WhatsAppMessage(BaseModel):
         return self.message_body or self.text
     
     def get_from_number(self) -> str:
-        return self.from_number or self.from_ or ""
+    # Asegura que siempre devuelve un string, usando from_ si from_number está vacío
+        return (self.from_number or getattr(self, "from_", None) or "").strip()
 
 # Modelo Pydantic para mensajes del dashboard
 class DashboardMessage(BaseModel):
