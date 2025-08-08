@@ -760,7 +760,8 @@ async def process_message(message: WhatsAppMessage):
                         (
                             p['image_url']
                             for p in products_with_absolute_urls
-                            if normalize_text(p['nombre']) == normalize_text(item.product_name)
+                            if normalize_text(item.product_name) in normalize_text(p['nombre'])
+                                or normalize_text(p['nombre']) in normalize_text(item.product_name)
                         ),
                         'No disponible'
                     )
