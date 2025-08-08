@@ -182,7 +182,7 @@ def normalize_text(text: str) -> str:
     if not text:
         return ""
     text = unicodedata.normalize('NFKD', text)
-    text = text.replace("″", '"').replace("“", '"').replace("”", '"')
+    text = text.replace("″", '"').replace(""", '"').replace(""", '"')
     return text.strip().lower()
 
 def match_product_name(cart_name: str, product_name: str) -> bool:
@@ -316,16 +316,113 @@ class WhatsAppMessage(BaseModel):
     def get_message_content(self) -> str | None:
         if self.message_type == "list_type" and self.list_reply:
             return self.list_reply.get("id")
+        # NUEVO: Manejar respuestas de botones
+        if self.message_type == "button" and self.button_id:
+            return self.button_id
         return self.message_body or self.text
     
     def get_from_number(self) -> str:
-    # Asegura que siempre devuelve un string, usando from_ si from_number está vacío
+        # Asegura que siempre devuelve un string, usando from_ si from_number está vacío
         return (self.from_number or getattr(self, "from_", None) or "").strip()
 
 # Modelo Pydantic para mensajes del dashboard
 class DashboardMessage(BaseModel):
     user_phone: str
     message: str
+
+# NUEVA FUNCIÓN: Crear mensaje con botones de WhatsApp
+def create_welcome_buttons_message(client_name: str = ""):
+    """Crea un mensaje con botones interactivos para WhatsApp"""
+    welcome_text = f"😊 ¡Hola{', ' + client_name if client_name and client_name != 'Desconocido' else ''}! Soy el asistente de HD Company. ¿En qué te ayudo hoy?"
+    
+    return {
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "body": {
+                "text": welcome_text
+            },
+            "action": {
+                "buttons": [
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "ofertas",
+                            "title": "🔥 Ofertas"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "laptops",
+                            "title": "💻 Laptops"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "impresoras",
+                            "title": "🖨️ Impresoras"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+
+def create_more_options_buttons():
+    """Crea botones adicionales para más opciones"""
+    return {
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "body": {
+                "text": "Más opciones disponibles:"
+            },
+            "action": {
+                "buttons": [
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "accesorios",
+                            "title": "🔌 Accesorios"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "soporte",
+                            "title": "🛠️ Soporte"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "agente",
+                            "title": "👨‍💼 Agente"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+
+# NUEVA FUNCIÓN: Manejar respuestas de botones
+def handle_button_response(button_id: str, client_name: str = ""):
+    """Maneja las respuestas de los botones interactivos"""
+    button_responses = {
+        "ofertas": lambda: format_products_response(search_products("ofertas"), "ofertas"),
+        "laptops": lambda: format_products_response(search_products("laptops"), "laptops"),
+        "impresoras": lambda: format_products_response(search_products("impresoras"), "impresoras"),
+        "accesorios": f"📋 Categorías de accesorios: Case, Cámaras, Discos, Monitores, Mouse y Teclado, Tarjetas de Video, Tablets. ¿Cuál quieres ver, {client_name if client_name != 'Desconocido' else 'Ko'}?",
+        "soporte": f"📅 Agendar soporte técnico: https://calendly.com/hdcompany/soporte. ¿En qué te ayudo ahora, {client_name if client_name != 'Desconocido' else 'Ko'}?",
+        "agente": "🔔 Te conecto con un agente. ¡Un momento! 😊"
+    }
+    
+    response = button_responses.get(button_id)
+    if callable(response):
+        return response()
+    return response
 
 # Crear tablas en la base de datos y usuario predeterminado
 async def init_db():
@@ -338,14 +435,6 @@ async def init_db():
             hashed_password = pwd_context.hash("admin123")
             session.add(User(username="admin", hashed_password=hashed_password))
             await session.commit()
-
-# Manejador de ciclo de vida para FastAPI
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     await init_db()
-#     yield
-
-# app.lifespan = lifespan
 
 # Socket.IO eventos
 @sio.event
@@ -472,6 +561,8 @@ async def process_message(message: WhatsAppMessage):
         from_number = message.get_from_number()
         print(f"Mensaje: {user_input}")
         print(f"Número: {from_number}")
+        print(f"Tipo de mensaje: {message.message_type}")
+        
         if not from_number:
             raise HTTPException(status_code=400, detail="Número de teléfono requerido")
 
@@ -527,7 +618,54 @@ async def process_message(message: WhatsAppMessage):
                         session.add(client)
                         session.add(conv)
                         await session.commit()
-                        response_body = f"😊 ¡Hola, {client.name}! Soy el asistente de HD Company. ¿En qué te ayudo hoy? Escribe: Ofertas, Laptops, Impresoras, Accesorios, Soporte, Agente."
+                        
+                        # NUEVO: Enviar mensaje con botones después de obtener el nombre
+                        welcome_message = create_welcome_buttons_message(client.name)
+                        bot_message = Message(
+                            conversation_id=conv.id,
+                            sender="agent",
+                            message=json.dumps(welcome_message),
+                            timestamp=datetime.utcnow()
+                        )
+                        session.add(bot_message)
+                        await session.commit()
+                        await sio.emit("new_message", {
+                            "user_phone": from_number,
+                            "name": conv.name,
+                            "is_group": conv.is_group,
+                            "group_id": conv.group_id,
+                            "state": conv.state,
+                            "escalated": conv.escalated,
+                            "message": json.dumps(welcome_message),
+                            "sender": "agent",
+                            "timestamp": datetime.utcnow().isoformat(),
+                            "active_poll": None
+                        })
+                        
+                        # Enviar también el mensaje con más opciones
+                        more_options = create_more_options_buttons()
+                        bot_message_2 = Message(
+                            conversation_id=conv.id,
+                            sender="agent",
+                            message=json.dumps(more_options),
+                            timestamp=datetime.utcnow()
+                        )
+                        session.add(bot_message_2)
+                        await session.commit()
+                        await sio.emit("new_message", {
+                            "user_phone": from_number,
+                            "name": conv.name,
+                            "is_group": conv.is_group,
+                            "group_id": conv.group_id,
+                            "state": conv.state,
+                            "escalated": conv.escalated,
+                            "message": json.dumps(more_options),
+                            "sender": "agent",
+                            "timestamp": datetime.utcnow().isoformat(),
+                            "active_poll": None
+                        })
+                        
+                        return [welcome_message, more_options]
                     else:
                         response_body = "😊 Por favor, dime tu nombre para continuar."
 
@@ -554,6 +692,56 @@ async def process_message(message: WhatsAppMessage):
                 return {
                     "type": "text",
                     "body": response_body
+                }
+
+            # NUEVO: Manejar respuestas de botones
+            if message.message_type == "button" and user_input:
+                button_response = handle_button_response(user_input, conv.name)
+                
+                # Si es solicitud de agente, manejar escalamiento
+                if user_input == "agente":
+                    conv.escalated = "True"
+                    conv.state = "escalated"
+                    await session.commit()
+                    
+                    # Notificar al agente
+                    import requests
+                    endpoint = f"https://graph.facebook.com/v20.0/{os.getenv('WHATSAPP_PHONE_NUMBER_ID')}/messages"
+                    headers = {
+                        "Authorization": f"Bearer {os.getenv('WHATSAPP_ACCESS_TOKEN')}",
+                        "Content-Type": "application/json"
+                    }
+                    payload = {
+                        "messaging_product": "whatsapp",
+                        "to": os.getenv("AGENT_PHONE_NUMBER", "+51992436107").replace("whatsapp:", ""),
+                        "type": "text",
+                        "text": {"body": f"🔔 Nueva solicitud de agente humano!\nUsuario: {from_number}\nNombre: {conv.name}"}
+                    }
+                    requests.post(endpoint, json=payload, headers=headers)
+                
+                bot_message = Message(
+                    conversation_id=conv.id,
+                    sender="agent",
+                    message=button_response,
+                    timestamp=datetime.utcnow()
+                )
+                session.add(bot_message)
+                await session.commit()
+                await sio.emit("new_message", {
+                    "user_phone": from_number,
+                    "name": conv.name,
+                    "is_group": conv.is_group,
+                    "group_id": conv.group_id,
+                    "state": conv.state,
+                    "escalated": conv.escalated,
+                    "message": button_response,
+                    "sender": "agent",
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "active_poll": None
+                })
+                return {
+                    "type": "text",
+                    "body": button_response
                 }
 
             # Manejar estado escalado
@@ -615,7 +803,7 @@ async def process_message(message: WhatsAppMessage):
                     "body": response_body
                 }
 
-            # Manejar solicitud de agente
+            # Manejar solicitud de agente (texto)
             if user_input.lower() in ["agente", "humano", "persona", "hablar con alguien"]:
                 conv.escalated = "True"
                 conv.state = "escalated"
@@ -665,15 +853,28 @@ async def process_message(message: WhatsAppMessage):
                 conv.escalated = "False"
                 conv.state = "active"
                 await session.commit()
-                response_body = f"¡Perfecto, {conv.name}! 😊 ¿En qué te ayudo ahora? Escribe: Ofertas, Laptops, Impresoras, Accesorios, Soporte, Agente."
-                bot_message = Message(
+                
+                # NUEVO: Enviar botones cuando regresa del escalamiento
+                welcome_message = create_welcome_buttons_message(conv.name)
+                more_options = create_more_options_buttons()
+                
+                bot_message_1 = Message(
                     conversation_id=conv.id,
                     sender="agent",
-                    message=response_body,
+                    message=json.dumps(welcome_message),
                     timestamp=datetime.utcnow()
                 )
-                session.add(bot_message)
+                session.add(bot_message_1)
+                
+                bot_message_2 = Message(
+                    conversation_id=conv.id,
+                    sender="agent",
+                    message=json.dumps(more_options),
+                    timestamp=datetime.utcnow()
+                )
+                session.add(bot_message_2)
                 await session.commit()
+                
                 await sio.emit("new_message", {
                     "user_phone": from_number,
                     "name": conv.name,
@@ -681,17 +882,28 @@ async def process_message(message: WhatsAppMessage):
                     "group_id": conv.group_id,
                     "state": conv.state,
                     "escalated": conv.escalated,
-                    "message": response_body,
+                    "message": json.dumps(welcome_message),
                     "sender": "agent",
                     "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
-                return {
-                    "type": "text",
-                    "body": response_body
-                }
+                
+                await sio.emit("new_message", {
+                    "user_phone": from_number,
+                    "name": conv.name,
+                    "is_group": conv.is_group,
+                    "group_id": conv.group_id,
+                    "state": conv.state,
+                    "escalated": conv.escalated,
+                    "message": json.dumps(more_options),
+                    "sender": "agent",
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "active_poll": None
+                })
+                
+                return [welcome_message, more_options]
 
-            # Manejar consultas de categorías
+            # Manejar consultas de categorías (MANTENER funcionalidad de texto)
             category_map = {
                 "laptops": ("Laptops y Accesorios", "laptops"),
                 "impresoras": ("Impresoras y Accesorios", "impresoras"),
@@ -732,7 +944,6 @@ async def process_message(message: WhatsAppMessage):
                         "type": "text",
                         "body": response_body
                     }
-
 
             # Consultas genéricas con LLM (incluye selección de productos, ver imagen, agregar al carrito)
             # Obtener contexto de conversación previa
