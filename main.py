@@ -827,116 +827,104 @@ async def process_message(message: WhatsAppMessage):
                 response = await llm.ainvoke(messages)
                 response_text = response.content
 
-                image_url_match = re.match(r'.*?(https?://[^\s]+(?:\.png|\.jpg|\.jpeg|\.gif))', response_text)
-                image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
+                # Definir opciones según el contexto
+                menu_options = [
+                    {"id": "ofertas", "title": "Ofertas"},
+                    {"id": "laptops", "title": "Laptops"},
+                    {"id": "impresoras", "title": "Impresoras"},
+                    {"id": "accesorios", "title": "Accesorios"},
+                    {"id": "soporte", "title": "Soporte"},
+                    {"id": "agente", "title": "Agente"}
+                ]
+                recommendation_options = [
+                    {"id": "add_cart", "title": "1) Agregar"},
+                    {"id": "view_image", "title": "2) Ver Img"},
+                    {"id": "keep_browsing", "title": "3) Seguir"}
+                ]
 
-                if image_url_match and not image_list_match:
-                    image_url = image_url_match.group(1).strip()
+                # Si es el inicio (respuesta a "Hola"), usar menú principal
+                if user_input and user_input.lower() == 'hola':
                     response_body = {
-                        "type": "image",
-                        "image": {"link": image_url},
-                        "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
+                        "messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": from_number,
+                        "type": "interactive",
+                        "interactive": {
+                            "type": "list" if len(menu_options) > 3 else "button",
+                            "body": {
+                                "text": f"😊 ¡Hola, {conv.name if conv.name != 'Desconocido' else 'Ko'}! ¿En qué te ayudo hoy?"
+                            },
+                            "action": {
+                                "button": "Ver" if len(menu_options) > 3 else None,
+                                "sections": [{"title": "Categorías", "rows": menu_options}] if len(menu_options) > 3 else None,
+                                "buttons": [{"type": "reply", "reply": {"id": opt["id"], "title": opt["title"]}} for opt in menu_options] if len(menu_options) <= 3 else None
+                            }
+                        }
                     }
-                elif image_list_match:
-                    image_lines = image_list_match.group(1).split('\n')
-                    response_body = []
-                    for line in image_lines:
-                        if ': ' in line:
-                            product_name, image_url = line.split(': ', 1)
-                            if image_url != 'No disponible':
-                                response_body.append({
-                                    "type": "image",
-                                    "image": {"link": image_url.strip()},
-                                    "caption": f"🖼️ Imagen de {product_name}"
-                                })
-                    if not response_body:
-                        response_body = {
-                            "type": "text",
-                            "body": f"🖼️ Tu carrito está vacío o no hay imágenes disponibles. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
+                # Si hay recomendación (por ejemplo, producto seleccionado)
+                elif "has seleccionado" in response_text and "carrito" not in response_text:
+                    response_body = {
+                        "messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": from_number,
+                        "type": "interactive",
+                        "interactive": {
+                            "type": "button" if len(recommendation_options) <= 3 else "list",
+                            "body": {
+                                "text": f"📝 {response_text}"
+                            },
+                            "action": {
+                                "button": "Ver" if len(recommendation_options) > 3 else None,
+                                "sections": [{"title": "Opciones", "rows": recommendation_options}] if len(recommendation_options) > 3 else None,
+                                "buttons": [{"type": "reply", "reply": {"id": opt["id"], "title": opt["title"]}} for opt in recommendation_options] if len(recommendation_options) <= 3 else None
+                            }
                         }
+                    }
+                # Otros casos (imágenes, carrito, etc.)
                 else:
-                    # Añadir botones según el contexto
-                    if "¡Hola de nuevo!" in response_text or "En qué te ayudo ahora" in response_text:
+                    image_url_match = re.match(r'.*?(https?://[^\s]+(?:\.png|\.jpg|\.jpeg|\.gif))', response_text)
+                    image_list_match = re.search(r'🖼️ Imágenes de tu carrito:\n(.+)', response_text, re.DOTALL)
+
+                    if image_url_match and not image_list_match:
+                        image_url = image_url_match.group(1).strip()
                         response_body = {
-                            "type": "interactive",
-                            "interactive": {
-                                "type": "list",
-                                "body": {
-                                    "text": f"😊 {response_text}"
-                                },
-                                "action": {
-                                    "button": "Ver",  # Cambiado de "Opciones" a "Ver" (3 caracteres)
-                                    "sections": [
-                                        {
-                                            "title": "Categorías",
-                                            "rows": [
-                                                {"id": "ofertas", "title": "Ofertas"},
-                                                {"id": "laptops", "title": "Laptops"},
-                                                {"id": "impresoras", "title": "Impresoras"},
-                                                {"id": "accesorios", "title": "Accesorios"},
-                                                {"id": "soporte", "title": "Soporte"},
-                                                {"id": "agente", "title": "Agente"}
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
+                            "messaging_product": "whatsapp",
+                            "recipient_type": "individual",
+                            "to": from_number,
+                            "type": "image",
+                            "image": {"link": image_url},
+                            "caption": f"🖼️ Imagen solicitada. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                         }
-                    elif "has seleccionado" in response_text and "carrito" not in response_text:
-                        response_body = {
-                            "type": "interactive",
-                            "interactive": {
-                                "type": "button",
-                                "body": {
-                                    "text": f"📝 {response_text}"
-                                },
-                                "action": {
-                                    "buttons": [
-                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar"}},
-                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver Img"}},
-                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir"}}
-                                    ]
-                                }
+                    elif image_list_match:
+                        image_lines = image_list_match.group(1).split('\n')
+                        response_body = []
+                        for line in image_lines:
+                            if ': ' in line:
+                                product_name, image_url = line.split(': ', 1)
+                                if image_url != 'No disponible':
+                                    response_body.append({
+                                        "messaging_product": "whatsapp",
+                                        "recipient_type": "individual",
+                                        "to": from_number,
+                                        "type": "image",
+                                        "image": {"link": image_url.strip()},
+                                        "caption": f"🖼️ Imagen de {product_name}"
+                                    })
+                        if not response_body:
+                            response_body = {
+                                "messaging_product": "whatsapp",
+                                "recipient_type": "individual",
+                                "to": from_number,
+                                "type": "text",
+                                "text": {"body": f"🖼️ Tu carrito está vacío o no hay imágenes disponibles. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"}
                             }
-                        }
-                    elif "Producto agregado al carrito" in response_text:
-                        response_body = {
-                            "type": "interactive",
-                            "interactive": {
-                                "type": "button",
-                                "body": {
-                                    "text": f"📝 {response_text}"
-                                },
-                                "action": {
-                                    "buttons": [
-                                        {"type": "reply", "reply": {"id": "pay", "title": "1) Pagar"}},
-                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "2) Seguir"}},
-                                        {"type": "reply", "reply": {"id": "view_cart_images", "title": "3) Ver Img"}}
-                                    ]
-                                }
-                            }
-                        }
-                    elif "Imagen solicitada" in response_text:
-                        response_body = {
-                            "type": "interactive",
-                            "interactive": {
-                                "type": "button",
-                                "body": {
-                                    "text": f"🖼️ {response_text}"
-                                },
-                                "action": {
-                                    "buttons": [
-                                        {"type": "reply", "reply": {"id": "add_cart", "title": "1) Agregar"}},
-                                        {"type": "reply", "reply": {"id": "view_image", "title": "2) Ver Img"}},
-                                        {"type": "reply", "reply": {"id": "keep_browsing", "title": "3) Seguir"}}
-                                    ]
-                                }
-                            }
-                        }
                     else:
                         response_body = {
+                            "messaging_product": "whatsapp",
+                            "recipient_type": "individual",
+                            "to": from_number,
                             "type": "text",
-                            "body": f"📝 {response_text}"
+                            "text": {"body": f"📝 {response_text}"}
                         }
 
                     if "Producto agregado al carrito" in response_text:
@@ -958,8 +946,11 @@ async def process_message(message: WhatsAppMessage):
             except FileNotFoundError:
                 response_text = f"🛠️ Lo siento, estamos en mantenimiento. Por favor, intenta de nuevo más tarde. ¿En qué te ayudo ahora, {conv.name if conv.name != 'Desconocido' else 'Ko'}?"
                 response_body = {
+                    "messaging_product": "whatsapp",
+                    "recipient_type": "individual",
+                    "to": from_number,
                     "type": "text",
-                    "body": response_text
+                    "text": {"body": response_text}
                 }
             chat_history.add_message(AIMessage(content=response_text))
             bot_message = Message(
