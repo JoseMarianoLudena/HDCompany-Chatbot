@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
 # C extensions
@@ -205,3 +205,20 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# HD Company Chatbot - Archivos específicos del proyecto
+*.db
+hdcompany.db
+test_*.py
+dev_scripts/
+dashboard.db
+instance/
+
+# Archivos de desarrollo y testing
+test_chatbot_*.py
+test_simple.py
+clear_cart.py
+
+# Variables de entorno locales
+.env.local
+.env.development
