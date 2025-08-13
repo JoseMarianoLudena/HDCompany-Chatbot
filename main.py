@@ -404,7 +404,7 @@ async def handle_add_to_cart_action(session, conv_id, user_phone, products):
             conversation_id=conv_id,
             sender="agent", 
             message="[Botones post-carrito enviados]",
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.utcnow()
         )
         session.add(bot_message)
         await session.commit()
@@ -1173,7 +1173,7 @@ async def post_dashboard(message: DashboardMessage, user: User = Depends(current
             conversation_id=conv.id,
             sender="agent",
             message=message.message,
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.utcnow()
         )
         session.add(new_message)
         await session.commit()
@@ -1186,7 +1186,7 @@ async def post_dashboard(message: DashboardMessage, user: User = Depends(current
             "escalated": conv.escalated,
             "message": message.message,
             "sender": "agent",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.utcnow().isoformat(),
             "active_poll": None
         })
         return {"status": "Mensaje enviado"}
@@ -1232,7 +1232,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="client",
                     message=user_input,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(new_message)
                 await session.commit()
@@ -1245,7 +1245,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": user_input,
                     "sender": "client",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
 
@@ -1262,7 +1262,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent", 
                         message="[Lista de opciones principales enviada]",
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1273,7 +1273,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_body,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1286,7 +1286,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_body,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_body}
@@ -1308,7 +1308,7 @@ async def process_message(message: WhatsAppMessage):
                                 conversation_id=conv.id,
                                 sender="agent", 
                                 message="[Lista de opciones principales enviada]",
-                                timestamp=datetime.now(timezone.utc)
+                                timestamp=datetime.utcnow()
                             )
                             session.add(bot_message)
                             await session.commit()
@@ -1327,7 +1327,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_body["body"],
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -1340,7 +1340,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_body["body"],
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return response_body
@@ -1420,7 +1420,7 @@ async def process_message(message: WhatsAppMessage):
                         user_phone=from_number,
                         product_name=matching_product['nombre'],
                         product_price=float(matching_product['precio'].replace("PEN ", "")),
-                        added_at=datetime.now(timezone.utc)
+                        added_at=datetime.utcnow()
                     )
                     session.add(cart_item)
                     await session.commit()
@@ -1438,7 +1438,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent",
                             message=f"Producto agregado: {matching_product['nombre']}",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -1450,7 +1450,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent",
                             message=fallback_msg,
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -1463,7 +1463,7 @@ async def process_message(message: WhatsAppMessage):
                             "escalated": conv.escalated,
                             "message": fallback_msg,
                             "sender": "agent",
-                            "timestamp": datetime.now(timezone.utc).isoformat(),
+                            "timestamp": datetime.utcnow().isoformat(),
                             "active_poll": None
                         })
                         return {"type": "text", "body": fallback_msg}
@@ -1475,7 +1475,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -1488,7 +1488,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": response_text}
@@ -1505,7 +1505,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent", 
                         message=f"[Gestión de carrito: {management_intent['action']}]",
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1516,7 +1516,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=result["body"],
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -1529,7 +1529,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": result["body"],
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return result
@@ -1546,7 +1546,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent", 
                             message="[Lista de opciones principales enviada - regreso]",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -1557,7 +1557,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_body,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1570,7 +1570,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_body,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_body}
@@ -1612,7 +1612,7 @@ async def process_message(message: WhatsAppMessage):
                         user_phone=from_number,
                         product_name=matching_product['nombre'],
                         product_price=float(matching_product['precio'].replace("PEN ", "")),
-                        added_at=datetime.now(timezone.utc)
+                        added_at=datetime.utcnow()
                     )
                     session.add(cart_item)
                     await session.commit()
@@ -1630,7 +1630,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent",
                             message=f"Producto agregado: {matching_product['nombre']}",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -1642,7 +1642,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -1655,7 +1655,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": response_text}
@@ -1675,7 +1675,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent", 
                             message="[Carrito vaciado - botones enviados]",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -1685,7 +1685,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=message,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -1698,7 +1698,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": message,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": message}
@@ -1712,7 +1712,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent", 
                         message="[Lista de opciones principales enviada]",
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1732,7 +1732,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1756,7 +1756,7 @@ async def process_message(message: WhatsAppMessage):
                                 conversation_id=conv.id,
                                 sender="agent",
                                 message=f"[Imagen enviada: {product_name}]",
-                                timestamp=datetime.now(timezone.utc)
+                                timestamp=datetime.utcnow()
                             )
                             session.add(bot_message)
                             await session.commit()
@@ -1774,7 +1774,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1787,7 +1787,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=cart_summary,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -1800,7 +1800,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": cart_summary,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": cart_summary}
@@ -1816,7 +1816,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1829,7 +1829,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1839,7 +1839,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1852,7 +1852,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1867,7 +1867,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1880,7 +1880,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1890,7 +1890,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1903,7 +1903,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1918,7 +1918,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1931,7 +1931,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1941,7 +1941,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1954,7 +1954,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1969,7 +1969,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -1982,7 +1982,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -1992,7 +1992,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -2005,7 +2005,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": response_text,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": response_text}
@@ -2029,7 +2029,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -2042,7 +2042,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": response_text}
@@ -2060,7 +2060,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -2073,7 +2073,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": response_text}
@@ -2130,7 +2130,7 @@ async def process_message(message: WhatsAppMessage):
                                     conversation_id=conv.id,
                                     sender="agent",
                                     message=f"Botones de producto enviados para **{product_name}**",
-                                    timestamp=datetime.now(timezone.utc)
+                                    timestamp=datetime.utcnow()
                                 )
                                 session.add(bot_message)
                                 await session.commit()
@@ -2143,7 +2143,7 @@ async def process_message(message: WhatsAppMessage):
                                     conversation_id=conv.id,
                                     sender="agent",
                                     message=fallback_msg,
-                                    timestamp=datetime.now(timezone.utc)
+                                    timestamp=datetime.utcnow()
                                 )
                                 session.add(bot_message)
                                 await session.commit()
@@ -2156,7 +2156,7 @@ async def process_message(message: WhatsAppMessage):
                                     "escalated": conv.escalated,
                                     "message": fallback_msg,
                                     "sender": "agent",
-                                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                                    "timestamp": datetime.utcnow().isoformat(),
                                     "active_poll": None
                                 })
                                 return {"type": "text", "body": fallback_msg}
@@ -2166,7 +2166,7 @@ async def process_message(message: WhatsAppMessage):
                                 conversation_id=conv.id,
                                 sender="agent",
                                 message=response_text,
-                                timestamp=datetime.now(timezone.utc)
+                                timestamp=datetime.utcnow()
                             )
                             session.add(bot_message)
                             await session.commit()
@@ -2179,7 +2179,7 @@ async def process_message(message: WhatsAppMessage):
                                 "escalated": conv.escalated,
                                 "message": response_text,
                                 "sender": "agent",
-                                "timestamp": datetime.now(timezone.utc).isoformat(),
+                                "timestamp": datetime.utcnow().isoformat(),
                                 "active_poll": None
                             })
                             return {"type": "text", "body": response_text}
@@ -2189,7 +2189,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent",
                             message=response_text,
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -2202,7 +2202,7 @@ async def process_message(message: WhatsAppMessage):
                             "escalated": conv.escalated,
                             "message": response_text,
                             "sender": "agent",
-                            "timestamp": datetime.now(timezone.utc).isoformat(),
+                            "timestamp": datetime.utcnow().isoformat(),
                             "active_poll": None
                         })
                         return {"type": "text", "body": response_text}
@@ -2223,7 +2223,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=payment_msg,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -2236,7 +2236,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": payment_msg,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": payment_msg}
@@ -2289,7 +2289,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent",
                             message=f"Imagen enviada: {selected_product}",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -2310,7 +2310,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -2323,7 +2323,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 return {"type": "text", "body": response_text}
@@ -2337,7 +2337,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent", 
                         message="[Lista de opciones principales enviada - continuar comprando]",
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -2348,7 +2348,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=fallback_msg,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -2361,7 +2361,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": fallback_msg,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": fallback_msg}
@@ -2374,7 +2374,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent", 
                         message="[Lista de opciones principales enviada - continuar comprando]",
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -2385,7 +2385,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=fallback_msg,
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message)
                     await session.commit()
@@ -2398,7 +2398,7 @@ async def process_message(message: WhatsAppMessage):
                         "escalated": conv.escalated,
                         "message": fallback_msg,
                         "sender": "agent",
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.utcnow().isoformat(),
                         "active_poll": None
                     })
                     return {"type": "text", "body": fallback_msg}
@@ -2411,7 +2411,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent", 
                             message="[Carrito mostrado con botones]",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -2493,7 +2493,7 @@ async def process_message(message: WhatsAppMessage):
                         conversation_id=conv.id,
                         sender="agent",
                         message=response_text,  # Registrar la respuesta completa del LLM
-                        timestamp=datetime.now(timezone.utc)
+                        timestamp=datetime.utcnow()
                     )
                     session.add(bot_message_list)
                     await session.commit()
@@ -2531,7 +2531,7 @@ async def process_message(message: WhatsAppMessage):
                                     conversation_id=conv.id,
                                     sender="agent",
                                     message=f"Botones de producto enviados para **{matching_product['nombre']}**",
-                                    timestamp=datetime.now(timezone.utc)
+                                    timestamp=datetime.utcnow()
                                 )
                                 session.add(bot_message)
                                 await session.commit()
@@ -2596,7 +2596,7 @@ async def process_message(message: WhatsAppMessage):
                                     conversation_id=conv.id,
                                     sender="agent",
                                     message=f"ACCION:AGREGAR_CARRITO:{matching_product['nombre']}",
-                                    timestamp=datetime.now(timezone.utc)
+                                    timestamp=datetime.utcnow()
                                 )
                                 session.add(bot_message)
                                 await session.commit()
@@ -2609,7 +2609,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent", 
                             message="[Carrito mostrado por LLM]",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -2624,7 +2624,7 @@ async def process_message(message: WhatsAppMessage):
                             conversation_id=conv.id,
                             sender="agent", 
                             message="[Menú principal mostrado por LLM]",
-                            timestamp=datetime.now(timezone.utc)
+                            timestamp=datetime.utcnow()
                         )
                         session.add(bot_message)
                         await session.commit()
@@ -2643,7 +2643,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -2656,7 +2656,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 
@@ -2670,7 +2670,7 @@ async def process_message(message: WhatsAppMessage):
                     conversation_id=conv.id,
                     sender="agent",
                     message=response_text,
-                    timestamp=datetime.now(timezone.utc)
+                    timestamp=datetime.utcnow()
                 )
                 session.add(bot_message)
                 await session.commit()
@@ -2683,7 +2683,7 @@ async def process_message(message: WhatsAppMessage):
                     "escalated": conv.escalated,
                     "message": response_text,
                     "sender": "agent",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.utcnow().isoformat(),
                     "active_poll": None
                 })
                 
