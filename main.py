@@ -1110,10 +1110,19 @@ async def post_login(
     
     jwt_strategy = get_jwt_strategy()
     token = await jwt_strategy.write_token(user)
-    cookie_transport.write(response, token)
+    response = RedirectResponse(url="/dashboard", status_code=303)
+    response.set_cookie(
+        key=cookie_transport.cookie_name,
+        value=token,
+        max_age=cookie_transport.cookie_max_age,
+        path=cookie_transport.cookie_path,
+        domain=cookie_transport.cookie_domain,
+        secure=cookie_transport.cookie_secure,
+        httponly=cookie_transport.cookie_httponly,
+        samesite=cookie_transport.cookie_samesite,
+    )
+    return response
     
-    return RedirectResponse(url="/dashboard", status_code=303)
-
 @app.get("/logout")
 async def logout(response: Response):
     response = RedirectResponse(url="/login", status_code=303)
