@@ -934,7 +934,12 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
                 return user
         return None
 
-async def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(lambda: SQLAlchemyUserDatabase(User, AsyncSessionLocal))):
+
+async def get_user_db():
+    async with AsyncSessionLocal() as session:
+        yield SQLAlchemyUserDatabase(session, User)
+
+async def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_db)):
     yield UserManager(user_db)
 
 fastapi_users = FastAPIUsers[User, int](
