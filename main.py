@@ -1109,7 +1109,7 @@ async def post_login(
         })
     
     jwt_strategy = get_jwt_strategy()
-    token = await jwt_strategy.create_access_token(data={"sub": str(user.id)})
+    token = await jwt_strategy.write_token(user)
     cookie_transport.write(response, token)
     
     return RedirectResponse(url="/dashboard", status_code=303)

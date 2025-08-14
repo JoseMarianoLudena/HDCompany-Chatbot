@@ -14,5 +14,5 @@ langsmith==0.3.45
 crewai==0.152.0
 asyncpg==0.29.0
 aiosqlite==0.20.0
-passlib==1.7.4
-bcrypt==4.2.1
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
